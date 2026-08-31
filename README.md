@@ -17,7 +17,7 @@ O primeiro objetivo é a contrução de uma planta de uma industria automatizada
 Portanto resulta na sequencia:  
 
 [Matéria-Prima] → [Esteira] → [Máquina] → [Esteira] → [Inspeção] → [Produto Final]  
---------↓-----------------↓-------------↓-------------↓-------------↓-----------------↓----------   
+--------↓----------------↓------------↓-------------↓------------↓----------------↓-----  
 ---Estoque--------Transporte---Transforma--Transporte--Verifica-------Armazenado  
 
 Equipamentos possuem estados próprios e podem executar ações sobre os materiais.  
@@ -100,8 +100,8 @@ Características importantes:
             - getTotalInspecionados()    
 
     
-    - Sitema no Terminal:  
-    -    -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.  
+- Sitema no Terminal:  
+-    -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.  
     
 
 # Pontos de atenção:  

@@ -104,7 +104,6 @@ Estrutura mínima do código:
         Tipo de produto fabricado;
         Matéria-prima principal utilizada;
         Identificação da dupla (nomes dos integrantes).
-
         Por exemplo:
             ========================================
             F ́ABRICA DE SUCO NATURAL
@@ -115,10 +114,8 @@ Estrutura mínima do código:
             sucos naturais e saborosos.
             Desenvolvido por: Marina Rocha e Carlos Souza
             ========================================
-
     Justificativa da escolha:
         Explicação do pq escolheu o tema da fábrica e uma visão de como a dupla imagina de espandir a indústria nas próximas tarefas.
-    
     Testar no terminal com:
         javac -d bin $(find src -name "*.java$)
         java -cp bin Main

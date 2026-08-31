@@ -18,9 +18,7 @@ Operações da planta industrial:
 
 Portanto resulta na sequencia:
 [Matéria-Prima] → [Esteira] → [Máquina] → [Esteira] → [Inspeção] → [Produto Final]
-
        ↓              ↓           ↓           ↓           ↓               ↓
-
     Estoque      Transporte   Transforma  Transporte   Verifica       Armazenado
 
 
@@ -95,20 +93,17 @@ Estrutura mínima do código:
                 -desativar()
                 -inspecionar(produto)
                 -getTotalInspecionados()
-                
     Sitema no Terminal:
         Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.
     Pontos de atenção:
         -Atributos privados, acesso via métodos públicos;
         -Maquina/esteira desligada não deve processar/transportar itens;
         -esteira com item não deve aceitar outro;
-        
     Introdução:
         Nome da fábrica;
         Tipo de produto fabricado;
         Matéria-prima principal utilizada;
         Identificação da dupla (nomes dos integrantes).
-        
         Por exemplo:
             ========================================
             F ́ABRICA DE SUCO NATURAL

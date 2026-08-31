@@ -17,8 +17,8 @@ Operações da planta industrial:
 Portanto resulta na sequencia:  
 
 [Matéria-Prima] → [Esteira] → [Máquina] → [Esteira] → [Inspeção] → [Produto Final]  
-       ↓              ↓           ↓           ↓           ↓               ↓  
-    Estoque      Transporte   Transforma  Transporte   Verifica       Armazenado  
+------↓---------------↓-----------↓-----------↓-----------↓---------------↓--------   
+****Estoque*******Transporte***Transforma**Transporte***Verifica******Armazenado  
 
 Equipamentos possuem estados próprios e podem executar ações sobre os materiais.  
 
@@ -32,18 +32,18 @@ Características importantes:
 *   Entrada de Dados apenas NÚMERICA
 
 
--Estrutura mínima do código:  
+Estrutura mínima do código:  
 
 -   Classes:
 
-        * MateriaPrima  
--            Atributos:
+-        MateriaPrima  
+-           *Atributos:
                 -identificador
                 -nome/tipo
                 -quantidade em estoque
                 -unidade de medida
                 -quantidade mínima pra produzir  
--            Métodos:
+-           *Métodos:
                 -consumir(quantidadeMP)
                 -adicionarEstoque()
                 -verificarDisponibilidade()
@@ -51,13 +51,13 @@ Características importantes:
                 -getNome()
                 -getQuantidade()  
 
-        * Produto:  
--            Atributos:
+-        Produto:  
+-           *Atributos:
                 -identificador
                 -nome/tipo
                 -status
                 -quantidadeMateriaPrimaNecessaria  
--            Métodos:
+-           *Métodos:
                 -processar()
                 -definirDemandaMateriaPrima(Quantidade)
                 -getDemandaMateriaPrima()
@@ -65,35 +65,35 @@ Características importantes:
                 -getNome()
                 -getStatus()  
 
-        * Maquina  
--            Atributos:
+-        Maquina  
+-           *Atributos:
                 -nome
                 -ligado/status
                 -capacidadeMaxima  
--            Métodos:
+-           *Métodos:
                 -ligar()
                 -desligar()
                 -processar(tipoProduto, demandaMP)
                 -getNome()
                 -estaLigada()  
 
-        * Esteira  
--            Atributos:
+-        Esteira  
+-           *Atributos:
                 -item
                 -emMovimento
                 -capacidadeMaxima  
--            Métodos:
+-           *Métodos:
                 -ligar()
                 -desligar()
                 -adicionarItem(item)
                 -removerItem()
                 -verificarCapacidade(item)
 
-        * EstacaoInspecao
--            Atributos:
+-        EstacaoInspecao  
+-           *Atributos:
                 -ativa
                 -produtosInspecionados  
--            Métodos:
+-           *Métodos:
                 -ativar()
                 -desativar()
                 -inspecionar(produto)
@@ -101,7 +101,7 @@ Características importantes:
 
     
     -Sitema no Terminal:
--        Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.
+        -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.
     
 
 -    Pontos de atenção:
@@ -110,17 +110,17 @@ Características importantes:
         * esteira com item não deve aceitar outro;
 
 
--    Introdução:
+- Introdução:
 
-*        Nome da fábrica;  
+*   Nome da fábrica;  
 
-*        Tipo de produto fabricado;  
+*   Tipo de produto fabricado;  
 
-*        Matéria-prima principal utilizada;    
+*   Matéria-prima principal utilizada;    
 
-*        Identificação da dupla (nomes dos integrantes).    
+*   Identificação da dupla (nomes dos integrantes).    
 
-*        Por exemplo:  
+-   - Por exemplo:  
 
             ========================================
             F ́ABRICA DE SUCO NATURAL
@@ -133,14 +133,14 @@ Características importantes:
             ========================================
 
 
--    Justificativa da escolha:
-        Explicação do pq escolheu o tema da fábrica e uma visão de como a dupla imagina de espandir a indústria nas próximas tarefas.
--    Testar no terminal com:
-        javac -d bin $(find src -name "*.java$")
+-    Justificativa da escolha:   
+        Explicação do pq escolheu o tema da fábrica e uma visão de como a dupla imagina de espandir a indústria nas próximas tarefas.   
+-    Testar no terminal com:  
+        javac -d bin $(find src -name "*.java$")   
         java -cp bin Main
 
 
--    No main deve contér metodo a seguir: public static void main(String[] args)
+-    No main deve contér metodo a seguir: public static void main(String[] args)   
 
 
 Fim do README.md    

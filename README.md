@@ -21,7 +21,9 @@ Operações da planta industrial:
 Portanto resulta na sequencia:
 
 [Matéria-Prima] → [Esteira] → [Máquina] → [Esteira] → [Inspeção] → [Produto Final]
+
        ↓              ↓           ↓           ↓           ↓               ↓
+
     Estoque      Transporte   Transforma  Transporte   Verifica       Armazenado
 
 

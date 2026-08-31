@@ -5,7 +5,7 @@ Realese 1 == Tarefa 1
 O primeiro objetivo é a contrução de uma planta de uma industria automatizada que é composta por matérias-primas, produtos, equipamentos e linha de produção.  
 
 
-#Operações da planta industrial:  
+# Operações da planta industrial:  
 
 *   Entrada MP, então armazenar no estoque.
 *   Transporte MP via esteira para a máquina de processamento, apenas se esteira em movimento.
@@ -32,79 +32,79 @@ Características importantes:
 *   Entrada de Dados apenas NÚMERICA
 
 
-#Estrutura mínima do código:  
+# Estrutura mínima do código:  
 
 * Classes:
 
     - MateriaPrima  
         * Atributos:  
-            -identificador  
-            -nome/tipo  
-            -quantidade em estoque  
-            -unidade de medida  
-            -quantidade mínima pra produzir  
+            - identificador  
+            - nome/tipo  
+            - quantidade em estoque  
+            - unidade de medida  
+            - quantidade mínima pra produzir  
         * Métodos:  
-            -consumir(quantidadeMP)  
-            -adicionarEstoque()  
-            -verificarDisponibilidade()  
-            -getID()  
-            -getNome()  
-            -getQuantidade()    
+            - consumir(quantidadeMP)  
+            - adicionarEstoque()  
+            - verificarDisponibilidade()  
+            - getID()  
+            - getNome()  
+            - getQuantidade()    
 
     - Produto:  
         * Atributos:  
-            -identificador  
-            -nome/tipo  
-            -status  
-            -quantidadeMateriaPrimaNecessaria  
+            - identificador  
+            - nome/tipo  
+            - status  
+            - quantidadeMateriaPrimaNecessaria  
         * Métodos:  
-            -processar()  
-            -definirDemandaMateriaPrima(Quantidade)  
-            -getDemandaMateriaPrima()  
-            -getID()  
-            -getNome()  
-            -getStatus()    
+            - processar()  
+            - definirDemandaMateriaPrima(Quantidade)  
+            - getDemandaMateriaPrima()  
+            - getID()  
+            - getNome()  
+            - getStatus()    
 
     - Maquina  
         * Atributos:  
-            -nome  
-            -ligado/status  
-            -capacidadeMaxima    
+            - nome  
+            - ligado/status  
+            - capacidadeMaxima    
         * Métodos:  
-            -ligar()  
-            -desligar()  
-            -processar(tipoProduto, demandaMP)  
-            -getNome()  
-            -estaLigada()    
+            - ligar()  
+            - desligar()  
+            - processar(tipoProduto, demandaMP)  
+            - getNome()  
+            - estaLigada()    
 
     - Esteira  
         * Atributos:  
-            -item  
-            -emMovimento  
-            -capacidadeMaxima  
+            - item  
+            - emMovimento  
+            - capacidadeMaxima  
         * Métodos:  
-            -ligar()  
-            -desligar()  
-            -adicionarItem(item)  
-            -removerItem()  
-            -verificarCapacidade(item)  
+            - ligar()  
+            - desligar()  
+            - adicionarItem(item)  
+            - removerItem()  
+            - verificarCapacidade(item)  
 
     - EstacaoInspecao  
         * Atributos:  
-            -ativa  
-            -produtosInspecionados    
+            - ativa  
+            - produtosInspecionados    
         * Métodos:  
-            -ativar()  
-            -desativar()  
-            -inspecionar(produto)  
-            -getTotalInspecionados()    
+            - ativar()  
+            - desativar()  
+            - inspecionar(produto)  
+            - getTotalInspecionados()    
 
     
     - Sitema no Terminal:  
     -    -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.  
     
 
--   Pontos de atenção:  
+# Pontos de atenção:  
         * Atributos privados, acesso via métodos públicos;  
         * Maquina/esteira desligada não deve processar/transportar itens;  
         * esteira com item não deve aceitar outro;  
@@ -112,15 +112,15 @@ Características importantes:
 
 - Introdução:  
 
-*   Nome da fábrica;    
+    * Nome da fábrica;    
 
-*   Tipo de produto fabricado;    
+    * Tipo de produto fabricado;    
 
-*   Matéria-prima principal utilizada;    
+    * Matéria-prima principal utilizada;    
 
-*   Identificação da dupla (nomes dos integrantes).    
+    * Identificação da dupla (nomes dos integrantes).    
 
--   - Por exemplo:  
+- Por exemplo:  
 
             ========================================
             F ́ABRICA DE SUCO NATURAL

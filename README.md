@@ -18,7 +18,7 @@ Portanto resulta na sequencia:
 
 [Matéria-Prima] → [Esteira] → [Máquina] → [Esteira] → [Inspeção] → [Produto Final]  
 ------↓---------------↓-----------↓-----------↓-----------↓---------------↓--------   
-****Estoque*******Transporte***Transforma**Transporte***Verifica******Armazenado  
+---Estoque--------Transporte---Transforma--Transporte--Verifica-------Armazenado  
 
 Equipamentos possuem estados próprios e podem executar ações sobre os materiais.  
 
@@ -34,77 +34,77 @@ Características importantes:
 
 Estrutura mínima do código:  
 
--   Classes:
+* Classes:
 
--        MateriaPrima  
--           *Atributos:
-                -identificador
-                -nome/tipo
-                -quantidade em estoque
-                -unidade de medida
-                -quantidade mínima pra produzir  
--           *Métodos:
-                -consumir(quantidadeMP)
-                -adicionarEstoque()
-                -verificarDisponibilidade()
-                -getID()
-                -getNome()
-                -getQuantidade()  
+    - MateriaPrima  
+        * Atributos:
+            -identificador
+            -nome/tipo
+            -quantidade em estoque
+            -unidade de medida
+            -quantidade mínima pra produzir  
+        * Métodos:
+            -consumir(quantidadeMP)
+            -adicionarEstoque()
+            -verificarDisponibilidade()
+            -getID()
+            -getNome()
+            -getQuantidade()  
 
--        Produto:  
--           *Atributos:
-                -identificador
-                -nome/tipo
-                -status
-                -quantidadeMateriaPrimaNecessaria  
--           *Métodos:
-                -processar()
-                -definirDemandaMateriaPrima(Quantidade)
-                -getDemandaMateriaPrima()
-                -getID()
-                -getNome()
-                -getStatus()  
+    - Produto:  
+        * Atributos:
+            -identificador
+            -nome/tipo
+            -status
+            -quantidadeMateriaPrimaNecessaria  
+        * Métodos:
+            -processar()
+            -definirDemandaMateriaPrima(Quantidade)
+            -getDemandaMateriaPrima()
+            -getID()
+            -getNome()
+            -getStatus()  
 
--        Maquina  
--           *Atributos:
-                -nome
-                -ligado/status
-                -capacidadeMaxima  
--           *Métodos:
-                -ligar()
-                -desligar()
-                -processar(tipoProduto, demandaMP)
-                -getNome()
-                -estaLigada()  
+    - Maquina  
+        * Atributos:
+            -nome
+            -ligado/status
+            -capacidadeMaxima  
+        * Métodos:
+            -ligar()
+            -desligar()
+            -processar(tipoProduto, demandaMP)
+            -getNome()
+            -estaLigada()  
 
--        Esteira  
--           *Atributos:
-                -item
-                -emMovimento
-                -capacidadeMaxima  
--           *Métodos:
-                -ligar()
-                -desligar()
-                -adicionarItem(item)
-                -removerItem()
-                -verificarCapacidade(item)
+    - Esteira  
+        * Atributos:
+            -item
+            -emMovimento
+            -capacidadeMaxima  
+        * Métodos:
+            -ligar()
+            -desligar()
+            -adicionarItem(item)
+            -removerItem()
+            -verificarCapacidade(item)
 
--        EstacaoInspecao  
--           *Atributos:
-                -ativa
-                -produtosInspecionados  
--           *Métodos:
-                -ativar()
-                -desativar()
-                -inspecionar(produto)
-                -getTotalInspecionados()  
+    - EstacaoInspecao  
+        * Atributos:
+            -ativa
+            -produtosInspecionados  
+        * Métodos:
+            -ativar()
+            -desativar()
+            -inspecionar(produto)
+            -getTotalInspecionados()  
 
     
-    -Sitema no Terminal:
-        -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.
+    - Sitema no Terminal:
+    -    -Menu de opções numéricas que permita selecionar produto a produzir, definir demanda de MP e consultar estoque MP, além de informar o estado da produção durante a execução.
     
 
--    Pontos de atenção:
+-   Pontos de atenção:
         * Atributos privados, acesso via métodos públicos;
         * Maquina/esteira desligada não deve processar/transportar itens;
         * esteira com item não deve aceitar outro;

@@ -29,7 +29,7 @@ public class MateriaPrima {
         }
         return 0;
     }
-    public String getID(){
+    public String getId(){
         return id;
     }
     public String getNome(){

@@ -5,7 +5,7 @@ public class MateriaPrima {
     private String unidade="metros"; // considerando chapas de metal q se compra em metro
     private int quantidadeMinima=1; //vai depender do produto, mas é 1, pois precisar pelo menos ter em estoque pra produzir algokkkk
     public void consumir(int demanda){
-        if (demanda<=0 && quantidade<demanda){
+        if (verificarDisponibilidade(demanda)){
             quantidade-=demanda; //atualiza o estoque, já consumindo o demandado
             System.out.println("Estoque atualizado!");
         }return;
@@ -23,11 +23,11 @@ public class MateriaPrima {
         if (demanda<=0){
             System.out.println("Aviso! \nDemanda nula ou negativa");//não é pra acontecer, mas por segurança existe
         }else if(quantidade<demanda){
-            System.out.println("ERRO ao consumir!!!\nPuts... Demanda ultrapassou o estoque de MP");//MP é matéria-prima
+            System.out.println("Aviso! \nPuts... Demanda ultrapassou o estoque de MP");//MP é matéria-prima
         }else{
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
     public String getId(){
         return id;
@@ -37,5 +37,8 @@ public class MateriaPrima {
     }
     public int getQuantidade(){
         return quantidade;
+    }
+    public String getUnidade(){
+        return unidade;
     }
 }

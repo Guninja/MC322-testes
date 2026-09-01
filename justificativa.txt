@@ -1,0 +1,9 @@
+TEMA Peças de Carro
+
+Foi escolhido esse tema por ter criado um interesse em carros durante auto-escola, pois eu (Luís Gustavo) tirei a carteira de motorista recentemente, enquanto o Julio está no processo conseguir a CNH.
+Como é de conhecimento geral, na auto-escola se aprende o básico do carro e, nós como pessoas curiosas, criamos interesse no assunto e decidimos usar como tema da industria.
+Além disso, eu (Julio Marcos) trabalho na MECATRON (empresa junior da eng. de controle e automação) e conversei com um cliente da EJ sobre a empresa dele que fabrica peças de carro, então o assunto que eu já estava curioso veio a tona para ser o tema da fábrica imaginária.
+Conversamos sobre peças especificamente, pois a possibilidade de expansão para diversas peças com muitas matérias-primas ou diferentes peças com mesma matéria-prima é muito viável.
+Inicialmente conversamos de começar com a lataria do carro, sendo matéria-prima o metal e o produto algumas latarias como porta, capô e teto. 
+Há varias formas de expansão, pode-se expandir mais processos no futuro em cima do mesmo produto, podendo ter pintura e invernização por exemplo.
+Também podemos aumentar a complexidade dos pordutos tendo teto solar para fabricarmos com uma parte eletrônica básica como servos implantados com conectores genéricos para maior facilidade de implementação no mercado, mas isso já começa a ser muito específico para essa primeira tarefa, então fico por aqui, pois ideias não faltam.

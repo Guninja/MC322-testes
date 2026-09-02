@@ -11,6 +11,11 @@ public class Produto {
 
     public void processar(){
         status="produzido";
+        System.out.println("Produto produzido...");
+    }
+
+    public void avaliar(){
+        status="avaliado";
     }
 
     public void definirDemandaMateriaPrima(int demanda){

@@ -10,10 +10,12 @@ public class Maquina {
 
     public void ligar(){
         ligada=true;
+        System.out.println("Máquina Ligada...");
     }
 
     public void desligar(){
         ligada=false;
+        System.out.println("Máquina desligada...");
     }
 
     public void processar(Produto obraPrima, MateriaPrima material, int quantidadeProdutos){

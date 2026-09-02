@@ -26,7 +26,7 @@ public class MateriaPrima {
         }
         else{
             quantidade+=encomenda;
-            System.out.println("Estoque atualizado!");
+            System.out.println("Estoque atualizado...");
         }
     }
 

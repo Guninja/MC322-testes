@@ -9,9 +9,10 @@ public class Produto {
         nome=nomeado;
     }
 
-    public void processar(){
+    public boolean processar(){
         status="produzido";
         System.out.println("Produto produzido...");
+        return true;
     }
 
     public void avaliar(){

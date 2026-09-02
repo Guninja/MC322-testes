@@ -36,7 +36,7 @@ public class Esteira {
             return false;
         } else{
             item = novoItem;
-            System.out.println(novoItem + "'está na esteira");
+            System.out.println(novoItem + " está na esteira");
             return true;
         }
     }

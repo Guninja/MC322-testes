@@ -18,9 +18,9 @@ public class Maquina {
         System.out.println("Máquina desligada...");
     }
 
-    public boolean processar(Produto obraPrima, MateriaPrima material, int quantidadeProdutos){
-        int demandaMaterial=(quantidadeProdutos*obraPrima.getDemandaMateriaPrima());
-        if(estaLigada()==false){
+    public boolean processar(Produto obraPrima, MateriaPrima material){
+        int demandaMaterial=obraPrima.getDemandaMateriaPrima();
+        if(!estaLigada()){
             System.out.println("Produto não processado, poxa, a máquina está desligada!");
         }else if(capacidadeMaxima<demandaMaterial){
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");

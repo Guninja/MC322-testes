@@ -87,20 +87,20 @@ public class Main {
         estacao.ativar();
         if(!inMaquina.adicionarItem(metaal.getId(), prodProduzindo.getDemandaMateriaPrima())){
             System.out.println("-FALHA NA ESTERIA APÓS ESTOQUE-");
-            break;
+            return;
         }else if(!moldagem.processar(prodProduzindo, metaal)){
             System.out.println("-FALHA NA ESTAMPAGEM-");
             inMaquina.removerItem();
-            break;
+            return;
         }else if(!outMaquina.adicionarItem(prodProduzindo.getId(), prodProduzindo.getDemandaMateriaPrima())){
             System.out.println("-FALHA NA ESTEIRA APÓS ESTAMPAGEM-");
             inMaquina.removerItem();
-            outMaquina.removerItem();
-            break;
-        }else if(!estacao.inspecionar(outMaquina.removerItem())){
+            return;
+        }else if(!estacao.inspecionar(prodProduzindo)){
             System.out.println("-FALHA NA VALIDAÇÃO-");
             inMaquina.removerItem();
-            break;
+            outMaquina.removerItem();
+            return;
         }else{
             inMaquina.removerItem();
             outMaquina.removerItem();

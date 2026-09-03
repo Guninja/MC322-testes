@@ -8,7 +8,7 @@ public class Main {
         Produto teto=new Produto("PROD03", "Teto");//um dia terei um solar...
         Produto[] listaProdutos={capo, porta, teto};
         Maquina estampagem=new Maquina("Estampagem", 15);//é o processo de moldagem da lataria dos carros
-        Esteira esteiraOutMaquina=new Esteira(false, 10);//instanciada parada com limite de 4 produtos
+        Esteira esteiraOutMaquina=new Esteira(false, 10);//instanciada parada com limite de 10 produtos
         Esteira esteiraInMaquina=new Esteira(false, 10);//instanciada parada com limite de 10m^2 de MP
         EstacaoInspecao validacao=new EstacaoInspecao(false);//instanciada desligada
         Scanner entrada=new Scanner(System.in);
@@ -27,11 +27,11 @@ public class Main {
                 int opcaoMenu=entrada.nextInt();
                 switch(opcaoMenu){//primeiro switch, escolha do menu  principal
                     case 0:
-                        System.out.println("-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
+                        System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
                         menuAtivo=false;
                         break;
                     case 1:
-                        System.out.println("-CADASTRO DE ESTOQUE-\nQuanto deseja estocar de "+metal.getNome()+" (em "+metal.getUnidade()+")\nDigite um número: ");
+                        System.out.println("\n-CADASTRO DE ESTOQUE-\nQuanto deseja estocar de "+metal.getNome()+" (em "+metal.getUnidade()+")\nDigite um número: ");
                         if(entrada.hasNextInt()){
                             int addEstoque=entrada.nextInt();
                             metal.adicionarEstoque(addEstoque);
@@ -40,7 +40,7 @@ public class Main {
                             entrada.next();
                         }break;
                     case 2:
-                        System.out.println("-PRODUÇAO-\n0 -> Voltar\n1 -> "+listaProdutos[0].getNome()+"\n2 -> "+listaProdutos[1].getNome()+"\n3 -> "+listaProdutos[2].getNome());
+                        System.out.println("\n-PRODUÇAO-\n0 -> Voltar\n1 -> "+listaProdutos[0].getNome()+"\n2 -> "+listaProdutos[1].getNome()+"\n3 -> "+listaProdutos[2].getNome());
                         System.out.println("Digite o número respectivo do produto: ");
                         while(!entrada.hasNextInt()){//denovo o filtro pra só deixar respostar numericas
                             entrada.next();
@@ -61,7 +61,7 @@ public class Main {
                         validacao.desativar();
                         break;
                     case 3:
-                        System.out.println("-CONSULTA DE ESTOQUE-\n");
+                        System.out.println("\n-CONSULTA DE ESTOQUE-\n");
                         System.out.println(metal.getNome()+" -> "+metal.getQuantidade()+" "+metal.getUnidade());
                         System.out.println("Produtos avaliados -> "+validacao.getTotalInspecionados());
                         break;

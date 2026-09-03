@@ -45,7 +45,6 @@ public class Esteira {
         if (item != null){
             String itemremovido = item;
             item = null;
-            System.out.println("item removido");
             return itemremovido;
         }
         else {

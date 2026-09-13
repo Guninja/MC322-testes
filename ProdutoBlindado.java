@@ -10,7 +10,7 @@ public class ProdutoBlindado extends Produto {
     }
 
     public int calcularTempoProducao(){
-        return 30;//30minutos para produzie lataria blindada
+        return 30;//30 minutos para produzir lataria blindada
     }
 
     public String getTipo(){

@@ -1,12 +1,20 @@
-public class Maquina {
+public abstract class Maquina {
     private String nome;
     private boolean ligada=false; //é o status da máquina se on/off
     private int capacidadeMaxima;//capacidade de guardar matéria prima usada na produção atual
+    private float probabilidadeFalha;
+    private float custOperacao;
 
-    public Maquina(String nomeado, int capacidade){
+    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, float custoOperacao){
         nome=nomeado;
         capacidadeMaxima=capacidade;
+        probabilidadeFalha = probabilidadeDefalha;
+        this.custOperacao = custoOperacao;
     }
+
+    public abstract boolean processar(Produto obraPrima, MateriaPrima material);
+
+    public abstract String getTipo();
 
     public void ligar(){
         ligada=true;
@@ -18,17 +26,8 @@ public class Maquina {
         System.out.println("Máquina desligada...");
     }
 
-    public boolean processar(Produto obraPrima, MateriaPrima material){
-        int demandaMaterial=obraPrima.getDemandaMateriaPrima();
-        if(!estaLigada()){
-            System.out.println("Produto não processado, poxa, a máquina está desligada!");
-        }else if(capacidadeMaxima<demandaMaterial){
-            System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
-        }else if(material.consumir(demandaMaterial)){
-            return obraPrima.processar();
-        }else{
-            System.out.println("Falta estoqueeee!!! Máquina não processou");
-        }return false;
+    protected boolean verificarFalha(){
+        return Math.random() < probabilidadeFalha;
     }
 
     public String getNome(){
@@ -37,5 +36,13 @@ public class Maquina {
 
     public boolean estaLigada(){
         return ligada;
+    }
+
+    public float getcustOperacao(){
+        return custOperacao;
+    }
+
+    public int getCapacidadeMaxima() {
+        return capacidadeMaxima;
     }
 }

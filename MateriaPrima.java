@@ -1,15 +1,16 @@
 public class MateriaPrima {
     private String id;
     private String nome;
-    private int quantidade; //int pois os produtos será produzido apenas por int para evitar erros
+    private int quantidade;
     private String unidade;
-    private int quantidadeMinima=1; //vai depender do produto, mas é 1, pois precisar pelo menos ter em estoque pra produzir algokkkk
+    private int custoPorUnidade;
     
-    public MateriaPrima(String ID, String nomeado, String novaUnidade, int estoque){
+    public MateriaPrima(String ID, String nomeado, String novaUnidade, int estoque, int custoDoMaterial){
         id=ID;
         nome=nomeado;
         unidade=novaUnidade;
         quantidade=estoque;
+        custoPorUnidade=custoDoMaterial;
     }
 
     public boolean consumir(int demanda){
@@ -51,5 +52,12 @@ public class MateriaPrima {
 
     public int getQuantidade(){
         return quantidade;
+    }
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public int getCustoPorUnidade(){
+        return custoPorUnidade;
     }
 }

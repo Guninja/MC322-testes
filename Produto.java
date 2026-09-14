@@ -66,4 +66,12 @@ public abstract class Produto {
     public float getQualidade(){
         return qualidade;
     }
+
+    public float getProbabilidadeFalha(){
+        return probabilidadeFalhaAcumulada;
+    }
+
+    public int getTotalProdutosFabricados(){
+        return totalProdutosFabricados;
+    }
 }

@@ -1,7 +1,8 @@
-public class MaquinaPrensaEstampagem extends Maquina {
-    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, float custoOpe){
+public class MaquinaCorteLaser extends Maquina {
+    public MaquinaCorteLaser(String nomeMaq, int capMax, float prob, float custoOpe){
         super(nomeMaq, capMax, prob, custoOpe);
     }
+
 
     public boolean processar(Produto obraPrima, MateriaPrima material){
         int demandaMaterial=obraPrima.getDemandaMateriaPrima();
@@ -11,16 +12,17 @@ public class MaquinaPrensaEstampagem extends Maquina {
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         }else if(material.consumir(demandaMaterial)){
             if (verificarFalha()){
-               obraPrima.aumentarProbabilidadeFalha(0.07f); 
+               obraPrima.aumentarProbabilidadeFalha(0.06f); 
             }
             return obraPrima.processar();
         }else{
             System.out.println("Falta estoqueeee!!! Máquina não processou");
-        }return false;
+        }
+        return false;
     }
 
 
     public String getTipo(){
-        return "Prensa de Estampagem";
+        return "Maquina de corte a Laser";
     }
 }

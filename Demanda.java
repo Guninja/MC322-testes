@@ -8,12 +8,12 @@ public class Demanda {
         quantidadeProdutos = quantosProdutos;
     }
 
-    public int atualizardemanda(int demanda){
+    public int atualizarDemanda(int demanda){
         quantidadeProdutos = quantidadeProdutos + demanda;
         return quantidadeProdutos;
     }
 
-    public int calcularMPnecessaria(int quantidadeMPporunidade ){
+    public int calcularMPnecessaria(int quantidadeMPporunidade){
         int MPnecessaria = quantidadeMPporunidade * quantidadeProdutos;
         return MPnecessaria;
     }
@@ -24,5 +24,13 @@ public class Demanda {
             System.out.println("Demanda atendida!!!");
         }
         return atendida;
+    }
+
+    public String getTipoProduto(){
+        return tipoProduto;
+    }
+
+    public int getQuantidadeProdutos(){
+        return quantidadeProdutos;
     }
 }

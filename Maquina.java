@@ -3,9 +3,9 @@ public abstract class Maquina {
     private boolean ligada=false; //é o status da máquina se on/off
     private int capacidadeMaxima;//capacidade de guardar matéria prima usada na produção atual
     private float probabilidadeFalha;
-    private float custoOperacao;
+    private int custoOperacao;
 
-    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, float custoOperacao){
+    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, int custoOperacao){
         nome=nomeado;
         capacidadeMaxima=capacidade;
         probabilidadeFalha = probabilidadeDefalha;
@@ -38,7 +38,7 @@ public abstract class Maquina {
         return ligada;
     }
 
-    public float getCustoOperacao(){
+    public int getCustoOperacao(){
         return custoOperacao;
     }
 

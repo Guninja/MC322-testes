@@ -1,5 +1,5 @@
 public class MaquinaCorteLaser extends Maquina {
-    public MaquinaCorteLaser(String nomeMaq, int capMax, float prob, float custoOpe){
+    public MaquinaCorteLaser(String nomeMaq, int capMax, float prob, int custoOpe){
         super(nomeMaq, capMax, prob, custoOpe);
     }
 

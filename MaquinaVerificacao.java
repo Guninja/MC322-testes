@@ -1,5 +1,5 @@
 public class MaquinaVerificacao extends Maquina {
-    public MaquinaVerificacao (String nomeMaq, int capMax, float prob, float custoOpe){
+    public MaquinaVerificacao (String nomeMaq, int capMax, float prob, int custoOpe){
         super(nomeMaq, capMax, prob, custoOpe);
     }
 

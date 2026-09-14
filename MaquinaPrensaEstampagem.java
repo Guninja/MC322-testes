@@ -1,5 +1,5 @@
-public class MaquinaPrensaEstampagem extends Maquina {
-    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, float custoOpe){
+public class MaquinaPrensaEstampagem extends Maquina {//é o processo de moldagem da lataria dos carros
+    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, int custoOpe){
         super(nomeMaq, capMax, prob, custoOpe);
     }
 
@@ -18,7 +18,6 @@ public class MaquinaPrensaEstampagem extends Maquina {
             System.out.println("Falta estoqueeee!!! Máquina não processou");
         }return false;
     }
-
 
     public String getTipo(){
         return "Prensa de Estampagem";

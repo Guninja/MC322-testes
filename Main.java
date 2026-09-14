@@ -2,27 +2,34 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MateriaPrima metal=new MateriaPrima("MeBA", "Metal", "m^2", 8);//será que é aço ou európio??? nunca saberemos...
-        Produto capo=new Produto("PROD01", "Capô");//Kpô, donde se é uai?
-        Produto porta=new Produto("PROD02", "Porta");//porrta ou pohrta?
-        Produto teto=new Produto("PROD03", "Teto");//um dia terei um solar...
-        Produto[] listaProdutos={capo, porta, teto};
-        Maquina estampagem=new Maquina("Estampagem", 15);//é o processo de moldagem da lataria dos carros
-        Esteira esteiraOutMaquina=new Esteira(false, 10);//instanciada parada com limite de 10 produtos
-        Esteira esteiraInMaquina=new Esteira(false, 10);//instanciada parada com limite de 10m^2 de MP
-        EstacaoInspecao validacao=new EstacaoInspecao(false);//instanciada desligada
+        MateriaPrima metal=new MateriaPrima("MeBA", "Metal", "m^2", 0, 5);//será que é aço ou európio??? nunca saberemos... mas ambos são caros
+        GerenciadorProducao gerente=new GerenciadorProducao(460,metal);//esse objeto sabe muito...
+        MaquinaPrensaEstampagem prensa=new MaquinaPrensaEstampagem("Prensa de Estampagem", 20, 0.0f, 1);
+        MaquinaCorteLaser cnc=new MaquinaCorteLaser("CNC Corte Laser em metal", 10, 0.0f, 2);//cnc laser é cara pra rodar
+        MaquinaVerificacao inspecao=new MaquinaVerificacao("Inspeção", 30, 0.15f, 1);
+        gerente.adicionarMaquina(prensa);
+        gerente.adicionarMaquina(cnc);
+        gerente.adicionarMaquina(inspecao);
+        String capo="Capô";//Kpô, donde se é uai?
+        String porta="Porta";//porrta ou pohrta?
+        String teto="Teto";//um dia terei um solar...
+        String[] listaProdutos={capo, porta, teto};
         Scanner entrada=new Scanner(System.in);
         boolean menuAtivo=true;//esse é o estagiario, o famoso aux  :o
         while(menuAtivo){
             System.out.println("\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nFÁBRICA DE LATARIA DE CARRO\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n");
-            System.out.println("Máteria-Prima(MP): "+metal.getId()+" = "+metal.getNome());
-            System.out.println("Quantidade: "+metal.getQuantidade()+" "+metal.getUnidade());
-            System.out.println("Unidade: "+metal.getUnidade()+"\n");
-            System.out.println("Produtos Disponíveis:\n1 -> "+capo.getNome()+" (demanda: "+capo.getDemandaMateriaPrima()+" "+metal.getUnidade()+")");
-            System.out.println("2 -> "+porta.getNome()+" (demanda: "+porta.getDemandaMateriaPrima()+" "+metal.getUnidade()+")");
-            System.out.println("3 -> "+teto.getNome()+" (demanda: "+teto.getDemandaMateriaPrima()+" "+metal.getUnidade()+")");
-            System.out.println("\n__________________________\nMENU PRINCIPAL\n__________________________\n0 -> Sair\n1 -> Cadastrar estoque de MP\n2 -> Produzir\n3 -> Consultar estoque geral\n");
-            System.out.println("O que deseja?\nApenas número: ");
+            System.out.println("Máteria-Prima(MP): "+metal.getNome()+" ("+metal.getUnidade()+")\n");
+            gerente.exibirBudget();
+            System.out.println("\n\nProdutos Disponíveis:  (Qualidade)\n1 - Lataria Blindada (Alta)");
+            System.out.println("2 - Lataria Galvanizada (Média)");
+            System.out.println("3 - Lataria Chapa Bruta (Baixa)");
+            System.out.println("\n\n__________________________\nMENU PRINCIPAL\n__________________________");
+            System.out.println("ATUALIZAR DEMANDAS\n\n1 -> Atualizar demanda de Lataria Blindada\n2 -> Atualizar demanda de Lataria Galvanizada\n3 -> Atualizar demanda de Lataria Chapa Bruta\n");
+            System.out.println("\nFABRICAR\n\n4 -> Fabricar Lataria Blindada\n5 -> Fabricar Lataria Galvanizada\n6 -> Fabricar Lataria Chapa Bruta");
+            System.out.println("\nCONSULTAR\n\n7 -> Ver armazém\n8 -> Ver estoque de matéria-prima");
+            System.out.println("\nCOMPRAR MATÉRIA-PRIMA\n\n9 -> Comprar matéria-prima");
+            System.out.println("\n\n0 -> SAIR");
+            System.out.println("ESCOLHA: ");
             if(entrada.hasNextInt()){//filtro para aceitar apenas int na escolha do menu
                 int opcaoMenu=entrada.nextInt();
                 switch(opcaoMenu){//primeiro switch, escolha do menu  principal

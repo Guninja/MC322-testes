@@ -74,6 +74,7 @@ public class Main {
                         System.out.println(gerente.exibirArmazem());
                         break;
                     case 6:
+                        System.out.println("Digite quantas unidades de "+metal.getNome+" deseja comprar: ");
                         if(entrada.hasNextInt()){
                             int quantidadeComprando=entrada.nextInt();
                             gerente.comprarMateriaPrima(quantidadeComprando,metal.getCustoPorUnidade());

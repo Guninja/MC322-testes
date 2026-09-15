@@ -7,7 +7,7 @@ public abstract class Produto {
     private float probabilidadeFalhaAcumulada;
     private static int totalProdutosFabricados;
     
-    public Produto(String ID, String nomeado, float qualidadee){
+    public Produto(String ID, String nomeado, float qualidadee, int quantidadeMateriaPrimaPorUnidade){
         id=ID;
         nome=nomeado;
         if(qualidadee<0){
@@ -16,8 +16,9 @@ public abstract class Produto {
             qualidadee=1;
         }
         qualidade=qualidadee;
-        probabilidadeFalhaAcumulada=qualidade;
+        probabilidadeFalhaAcumulada=qualidade*0.30f;
         totalProdutosFabricados++;
+        this.quantidadeMateriaPrimaPorUnidade=quantidadeMateriaPrimaPorUnidade;
     }
 
     public abstract boolean processar();
@@ -65,5 +66,13 @@ public abstract class Produto {
 
     public float getQualidade(){
         return qualidade;
+    }
+
+    public float getProbabilidadeFalha(){
+        return probabilidadeFalhaAcumulada;
+    }
+
+    public int getTotalProdutosFabricados(){
+        return totalProdutosFabricados;
     }
 }

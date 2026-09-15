@@ -5,9 +5,9 @@ public class GerenciadorProducao {
     private ArrayList<Produto> produtosFabricados;
     private ArrayList<Maquina> maquinas;
     private MateriaPrima materiaPrima;
-    private float budget;
+    private int budget;
 
-    public GerenciadorProducao(float dinheiro, MateriaPrima materiaprima){
+    public GerenciadorProducao(int dinheiro, MateriaPrima materiaprima){
         demandas = new ArrayList<>();
         produtosFabricados = new ArrayList<>();
         maquinas = new ArrayList<>();
@@ -15,9 +15,12 @@ public class GerenciadorProducao {
         budget = dinheiro;
     }
 
-
     public void registrarDemanda(Demanda novaDemanda){
         demandas.add(novaDemanda);
+    }
+
+    public void adicionarMaquina(Maquina maquininha){
+        maquinas.add(maquininha);
     }
 
     public void atualizarDemanda(){
@@ -29,38 +32,55 @@ public class GerenciadorProducao {
         }
     }
 
-    public void fabricarDemanda(){
+    public boolean fabricarDemanda(){
+        if (demandas.isEmpty()) { //proteção pra possivel demanda vazia
+            System.out.println("Erro em gerar demanda, tentativa de fabricar falhou!"); 
+            return false; 
+        }
         Demanda demandaAtual = demandas.get(0);
-        Produto produto = new ProdutoGalvanizado("PROD" + (produtosFabricados.size() + 1), demandaAtual.getTipoProduto());
-
+        Produto produto = null;
+        String idGerado= "PROD"+ (produtosFabricados.size() + 1);
+        switch (demandaAtual.getTipoProduto()){
+            case "ProdutoChapaBruta":
+                produto = new ProdutoChapaBruta(idGerado, "ProdutoChapaBruta");
+                break;
+            case "ProdutoGalvanizado":
+                produto = new ProdutoGalvanizado(idGerado, "ProdutoGalvanizado");
+                break;
+            case "ProdutoBlindado":
+                produto = new ProdutoBlindado(idGerado, "ProdutoBlindado");
+                break;
+            default:
+                return false;
+        }
         for (Maquina m : maquinas) {
             m.ligar();
-            this.budget -= m.getcustOperacao();
+            this.budget -= m.getCustoOperacao();
             if (!m.processar(produto, materiaPrima)) {
                 System.out.println("Falha na máquina " + m.getNome());
-                return;
+                return false;
             }
         }
         produtosFabricados.add(produto);
         demandaAtual.atualizarDemanda(-1);
-        if (d.getQuantidadeProdutos() <= 0) {
+        if (demandaAtual.getQuantidadeProdutos() <= 0) {
             demandas.remove(0);
         }
+        return true;
     }
 
-    public void comprarMateriaPrima(int quantidade, float precoUnitario){
-        float custoTotal = quantidade * precoUnitario;
+    public void comprarMateriaPrima(int quantidade, int precoUnitario){
+        int custoTotal = quantidade * precoUnitario;
         if(budget >= custoTotal){
             budget -= custoTotal;
             materiaPrima.adicionarEstoque(quantidade);
         } else{
             System.out.println("Sem dinheiro para a compra");
         }
-
     }
 
-    public String exibirBudget(){
-        System.out.println("Budget atual:" + budget);
+    public void exibirBudget(){
+        System.out.println("Budget atual:" + budget + " Roblux");
     }
 
     public String exibirArmazem(){
@@ -75,13 +95,10 @@ public class GerenciadorProducao {
     }
 
     private int calcularCustoProducao(){
-        float custoTotal = 0;
+        int custoTotal = 0;
         for (Maquina m : maquinas) {
-            custoTotal += m.getcustOperacao();
+            custoTotal += m.getCustoOperacao();
         }
         return custoTotal;
     }
-
-
-
 }

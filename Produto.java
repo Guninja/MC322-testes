@@ -16,7 +16,7 @@ public abstract class Produto {
             qualidadee=1;
         }
         qualidade=qualidadee;
-        probabilidadeFalhaAcumulada=qualidade*0.3;
+        probabilidadeFalhaAcumulada=qualidade*0.30f;
         totalProdutosFabricados++;
         this.quantidadeMateriaPrimaPorUnidade=quantidadeMateriaPrimaPorUnidade;
     }

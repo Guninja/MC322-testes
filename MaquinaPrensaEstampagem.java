@@ -4,7 +4,7 @@ public class MaquinaPrensaEstampagem extends Maquina {//é o processo de moldage
     }
 
     public boolean processar(Produto obraPrima, MateriaPrima material){
-        int demandaMaterial=obraPrima.getDemandaMateriaPrima();
+        int demandaMaterial=obraPrima.getQuantidadeMateriaPrimaPorUnidade();
         if(!estaLigada()){
             System.out.println("Produto não processado, poxa, a máquina está desligada!");
         }else if(getCapacidadeMaxima()<demandaMaterial){

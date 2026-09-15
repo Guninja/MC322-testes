@@ -7,3 +7,9 @@ Conversamos sobre peças especificamente, pois a possibilidade de expansão para
 Inicialmente conversamos de começar com a lataria do carro, sendo matéria-prima o metal e o produto algumas latarias como porta, capô e teto. 
 Há varias formas de expansão, pode-se expandir mais processos no futuro em cima do mesmo produto, podendo ter pintura e invernização por exemplo.
 Também podemos aumentar a complexidade dos pordutos tendo teto solar para fabricarmos com uma parte eletrônica básica como servos implantados com conectores genéricos para maior facilidade de implementação no mercado, mas isso já começa a ser muito específico para essa primeira tarefa, então fico por aqui, pois ideias não faltam.
+
+Tarefa 2:
+ Para essa tarefa decidimos que era melhor mudar o plano original. Trocamos fabricar diferentes peças envolvendo a lataria do carro, pela lataria como um todo, porém feita de modos diferentes, cada vez um produto de maior qualidade.
+ Pensamos tambem em envolver as maquinas que já são usadas na indústria, mais uma de inspeção. A primeira faria o esqueleto da lataria, a segunda os cortes necessarios e por fim a verificação. 
+ No menu de produção tem as funcionalidades de atualizar demandas que enfilera os produtos em ordem que foi solicitada pelo usuario.
+ Para fabricar existe uma funcionalidade que desenfilera a fila de demanda de produção.

@@ -80,7 +80,7 @@ public class GerenciadorProducao {
     }
 
     public void exibirBudget(){
-        System.out.println("Budget atual:" + budget);
+        System.out.println("Budget atual:" + budget + " Roblux");
     }
 
     public String exibirArmazem(){

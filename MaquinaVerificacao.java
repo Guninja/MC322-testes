@@ -12,11 +12,11 @@ public class MaquinaVerificacao extends Maquina {
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         }else if(material.consumir(demandaMaterial)){
             if (verificarFalha()){
-               System.out.println("Produto de baixa qualidade, não passou nos testes de inspeção");
+               System.out.println("Produto reprovado e descartado, não passou nos testes de inspeção");
                 return false; 
             }
             if (Math.random() < obraPrima.getProbabilidadeFalha()){
-                System.out.println("Produto de baixa qualidade, não passou nos testes de inspeção");
+                System.out.println("Produto reprovado e descartado, não passou nos testes de inspeção");
                 return false;
             }
             return obraPrima.processar();

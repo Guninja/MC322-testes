@@ -1,4 +1,4 @@
-public abstract class Produto {
+public abstract class Produto implements Auditavel {
     private String id;
     private String nome;
     private String status="parado"; //"parado", "produzido" e "avaliado"
@@ -26,22 +26,9 @@ public abstract class Produto {
     public abstract int calcularTempoProducao(); 
     
     public abstract String getTipo();
-
-    public void avaliar(){
-        status="avaliado";
-    }
-
+    
     public void setStatus(String statusNovo){
         status=statusNovo;
-    }
-
-    public void definirDemandaMateriaPrima(int demanda){
-        if (demanda<=0){
-            System.out.println("ERRO\nTentativa de demanda definida nula ou negativa");
-        }else{
-            quantidadeMateriaPrimaPorUnidade=demanda;
-            System.out.println("Matéria Prima necessária atualizada");
-        }
     }
 
     public void aumentarProbabilidadeFalha(float falhaMaquina){
@@ -74,5 +61,17 @@ public abstract class Produto {
 
     public int getTotalProdutosFabricados(){
         return totalProdutosFabricados;
+    }
+
+    public boolean precisaManutencao(){
+        if (probabilidadeFalhaAcumulada>0.30f){
+            return true;
+        }
+        return false;
+    }
+
+    public String gerarRelatorioDiagnostico(){
+        String textoDiagnostico = precisaManutencao() ? "Lataria Danificada: precisa de manutenção!" : "Lataria com manutenção em dia :)";
+        return "Relatório...\n | Produto: "+nome+"\n | Qualidade: "+qualidade+"\n | Risco acumulado: "+probabilidadeFalhaAcumulada+"\n | Status: "+textoDiagnostico;
     }
 }

@@ -70,8 +70,12 @@ public abstract class Produto implements Auditavel {
         return false;
     }
 
+    public String getRisco(){
+        return precisaManutencao() ? "precisa de manutenção!" : "manutenção em dia :)";
+    }
+
     public String gerarRelatorioDiagnostico(){
         String textoDiagnostico = precisaManutencao() ? "Lataria Danificada: precisa de manutenção!" : "Lataria com manutenção em dia :)";
-        return "Relatório...\n | Produto: "+nome+"\n | Qualidade: "+qualidade+"\n | Risco acumulado: "+probabilidadeFalhaAcumulada+"\n | Status: "+textoDiagnostico;
+        return "\n | Produto: "+nome+" | Qualidade: "+qualidade+" | Risco acumulado: "+probabilidadeFalhaAcumulada+" | Status: "+textoDiagnostico;
     }
 }

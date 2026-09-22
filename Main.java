@@ -98,7 +98,7 @@ public class Main {
                                 }else{
                                     System.out.println("Demanda não atualizada,"+erroNaoInt);
                                     entrada.next();
-                                }
+                                }break;
                             case 2://Lataria Galvanizada selecionada
                                 System.out.print("\n-CRIANDO DEMANDA DE GALVANIZADO-\nQuanto deseja fabricar: ");
                                 if(entrada.hasNextInt()){
@@ -121,6 +121,7 @@ public class Main {
                                 }break;
                             case 4:
                                 System.out.println(gerente.exibirDemandas());
+                                break;
                             case 0:
                                 System.out.println("\nVoltando...");
                                 break;
@@ -150,6 +151,7 @@ public class Main {
                                 break;
                             case 0:
                                 System.out.println("\nVoltando...");
+                                break;
                             default:
                                 System.out.println("Número inválido!");
                                 break;

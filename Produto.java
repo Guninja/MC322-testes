@@ -1,7 +1,7 @@
 public abstract class Produto implements Auditavel {
     private String id;
     private String nome;
-    private String status="parado"; //"parado", "produzido" e "avaliado"
+    private StatusProduto status=StatusProduto.PARADO; //"Parado" ou "Produzido"
     private int quantidadeMateriaPrimaPorUnidade;
     private float qualidade;
     private float probabilidadeFalhaAcumulada;
@@ -27,8 +27,8 @@ public abstract class Produto implements Auditavel {
     
     public abstract String getTipo();
     
-    public void setStatus(String statusNovo){
-        status=statusNovo;
+    public void setStatus(StatusProduto status){
+        this.status=status;
     }
 
     public void aumentarProbabilidadeFalha(float falhaMaquina){
@@ -47,7 +47,7 @@ public abstract class Produto implements Auditavel {
         return nome;
     }
 
-    public String getStatus(){
+    public StatusProduto getStatus(){
         return status;
     }
 

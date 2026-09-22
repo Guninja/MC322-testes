@@ -4,7 +4,7 @@ public class ProdutoGalvanizado extends Produto {
     }
 
     public boolean processar(){
-        setStatus("produzido");
+        setStatus(StatusProduto.PRODUZIDO);
         System.out.println("Produto produzido...");
         return true;
     }

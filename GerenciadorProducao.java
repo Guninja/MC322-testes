@@ -24,15 +24,6 @@ public class GerenciadorProducao {
         maquinas.add(maquininha);
     }
 
-    public void atualizarDemanda(){
-        if(!demandas.isEmpty()){
-            demandas.remove(0);
-            System.out.println("Demanda atualizada");
-        } else{
-            System.out.println("Sem demanda :(");
-        }
-    }
-
     public boolean executarProximaProducao(){
         if (estrategiaAtual==null){//proteção pra se nao houver estrategia escolhida
             System.out.println("Erro, nenhuma estratégia definida\nDEFINA UMA ESTRATEGIA ANTES DE FABRICAR");
@@ -88,8 +79,8 @@ public class GerenciadorProducao {
         this.estrategiaAtual=estrategiaNova;
     }
 
-    public void exibirBudget(){
-        System.out.println("Budget atual:" + budget + " Roblux");
+    public String exibirBudget(){
+        return budget + " Robux";
     }
 
     public String exibirArmazem(){
@@ -102,9 +93,9 @@ public class GerenciadorProducao {
 
     public String exibirEstoqueMateriaPrima(){
         return "\n---ESTOQUE MATERIA-PRIMA ---\n\nMatéria-Prima (" + materiaPrima.getNome() + "): " + materiaPrima.getQuantidade() + "\n";
-    }
+    } 
 
-    private int calcularCustoProducao(){
+    public int calcularCustoProducao(){
         int custoTotal = 0;
         for (Maquina m : maquinas) {
             custoTotal += m.getCustoOperacao();
@@ -122,5 +113,14 @@ public class GerenciadorProducao {
             relatorio+=p.gerarRelatorioDiagnostico();
         }
         return relatorio;
+    }
+
+    public String exibirDemandas(){
+        String filaDemandas="Fila em ordem de criação de demandas:";
+        int i=0;
+        for (Demanda d:demandas){
+            filaDemandas+= "\n" + ++i + " - " + d.getTipoProduto() + " (x" + d.getQuantidadeProdutos() + ")";
+        }
+        return filaDemandas;
     }
 }

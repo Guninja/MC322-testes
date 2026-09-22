@@ -1,6 +1,6 @@
 public enum Cenario {
     IDEAL (10000, 0.05f, 1),
-    APOCALIPTICO (300, 0.30f, 6);
+    APOCALIPTICO (300, 0.40f, 6);
 
     private final int budgetInicial;
     private final float fatorFalha;

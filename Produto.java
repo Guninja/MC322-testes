@@ -1,7 +1,7 @@
-public abstract class Produto {
+public abstract class Produto implements Auditavel {
     private String id;
     private String nome;
-    private String status="parado"; //"parado", "produzido" e "avaliado"
+    private StatusProduto status=StatusProduto.PARADO; //"Parado" ou "Produzido"
     private int quantidadeMateriaPrimaPorUnidade;
     private float qualidade;
     private float probabilidadeFalhaAcumulada;
@@ -26,22 +26,9 @@ public abstract class Produto {
     public abstract int calcularTempoProducao(); 
     
     public abstract String getTipo();
-
-    public void avaliar(){
-        status="avaliado";
-    }
-
-    public void setStatus(String statusNovo){
-        status=statusNovo;
-    }
-
-    public void definirDemandaMateriaPrima(int demanda){
-        if (demanda<=0){
-            System.out.println("ERRO\nTentativa de demanda definida nula ou negativa");
-        }else{
-            quantidadeMateriaPrimaPorUnidade=demanda;
-            System.out.println("Matéria Prima necessária atualizada");
-        }
+    
+    public void setStatus(StatusProduto status){
+        this.status=status;
     }
 
     public void aumentarProbabilidadeFalha(float falhaMaquina){
@@ -60,7 +47,7 @@ public abstract class Produto {
         return nome;
     }
 
-    public String getStatus(){
+    public StatusProduto getStatus(){
         return status;
     }
 
@@ -74,5 +61,21 @@ public abstract class Produto {
 
     public int getTotalProdutosFabricados(){
         return totalProdutosFabricados;
+    }
+
+    public boolean precisaManutencao(){
+        if (probabilidadeFalhaAcumulada>0.30f){
+            return true;
+        }
+        return false;
+    }
+
+    public String getRisco(){
+        return precisaManutencao() ? "precisa de manutenção!" : "manutenção em dia :)";
+    }
+
+    public String gerarRelatorioDiagnostico(){
+        String textoDiagnostico = precisaManutencao() ? "Lataria Danificada: precisa de manutenção!" : "Lataria com manutenção em dia :)";
+        return "\n | Produto: "+nome+" | Qualidade: "+qualidade+" | Risco acumulado: "+probabilidadeFalhaAcumulada+" | Status: "+textoDiagnostico;
     }
 }

@@ -6,6 +6,7 @@ public class GerenciadorProducao {
     private ArrayList<Maquina> maquinas;
     private MateriaPrima materiaPrima;
     private int budget;
+    private EstrategiaProducao estrategiaAtual;
 
     public GerenciadorProducao(int dinheiro, MateriaPrima materiaprima){
         demandas = new ArrayList<>();
@@ -23,21 +24,16 @@ public class GerenciadorProducao {
         maquinas.add(maquininha);
     }
 
-    public void atualizarDemanda(){
-        if(!demandas.isEmpty()){
-            demandas.remove(0);
-            System.out.println("Demanda atualizada");
-        } else{
-            System.out.println("Sem demanda :(");
+    public boolean executarProximaProducao(){
+        if (estrategiaAtual==null){//proteção pra se nao houver estrategia escolhida
+            System.out.println("Erro, nenhuma estratégia definida\nDEFINA UMA ESTRATEGIA ANTES DE FABRICAR");
+            return false;
         }
-    }
-
-    public boolean fabricarDemanda(){
-        if (demandas.isEmpty()) { //proteção pra possivel demanda vazia
-            System.out.println("Erro em gerar demanda, tentativa de fabricar falhou!"); 
-            return false; 
+        Demanda demandaAtual=estrategiaAtual.selecionarDemanda(demandas, budget);
+        if (demandaAtual==null) {//proteção pra possivel demanda vazia
+            System.out.println("Erro ao encontrar demanda viável!(falta orçamento ou demanda na fila) Tentativa de fabricar falhou!"); 
+            return false;
         }
-        Demanda demandaAtual = demandas.get(0);
         Produto produto = null;
         String idGerado= "PROD"+ (produtosFabricados.size() + 1);
         switch (demandaAtual.getTipoProduto()){
@@ -64,7 +60,7 @@ public class GerenciadorProducao {
         produtosFabricados.add(produto);
         demandaAtual.atualizarDemanda(-1);
         if (demandaAtual.getQuantidadeProdutos() <= 0) {
-            demandas.remove(0);
+            demandas.remove(demandaAtual);
         }
         return true;
     }
@@ -79,26 +75,52 @@ public class GerenciadorProducao {
         }
     }
 
-    public void exibirBudget(){
-        System.out.println("Budget atual:" + budget + " Roblux");
+    public void setEstrategia(EstrategiaProducao estrategiaNova){
+        this.estrategiaAtual=estrategiaNova;
+    }
+
+    public String exibirBudget(){
+        return budget + " Robux";
     }
 
     public String exibirArmazem(){
-        String relatorio = "=== ESTOQUE DO ARMAZÉM ===\n";
-        relatorio += "Matéria-Prima (" + materiaPrima.getNome() + "): " + materiaPrima.getQuantidade() + "\n";
-        relatorio += "Produtos Fabricados: " + produtosFabricados.size() + " unidade(s)\n";
-
+        String relatorio = "--- ARMAZÉM DE PRODUTOS ---\n\nProdutos Fabricados: ( " + produtosFabricados.size() + " unidade(s) )\n";
         for (Produto p : produtosFabricados) {
-            relatorio += "- " + p.getNome() + " | Status: " + p.getStatus() + "\n";
+            relatorio += "- " + p.getNome() + " | Qualidade: " + p.getTipo() + " (" + p.getQualidade()*100 + "%) | LoteID: " + p.getId() + " | Status: " + p.getRisco() +"\n";
         }
         return relatorio;
     }
 
-    private int calcularCustoProducao(){
+    public String exibirEstoqueMateriaPrima(){
+        return "\n---ESTOQUE MATERIA-PRIMA ---\n\nMatéria-Prima (" + materiaPrima.getNome() + "): " + materiaPrima.getQuantidade() + "\n";
+    } 
+
+    public int calcularCustoProducao(){
         int custoTotal = 0;
         for (Maquina m : maquinas) {
             custoTotal += m.getCustoOperacao();
         }
         return custoTotal;
+    }
+
+    public String gerarRelatorioDiagnostico(){
+        String relatorio="--- RELATÓRIO DE AUDITORIA DA FÁBRICA ---\nMAQUINAS: ";
+        for (Maquina m : maquinas) {
+            relatorio+=m.gerarRelatorioDiagnostico();
+        }
+        relatorio+="PRODUTOS FABRICADOS: ";
+        for (Produto p : produtosFabricados) {
+            relatorio+=p.gerarRelatorioDiagnostico();
+        }
+        return relatorio;
+    }
+
+    public String exibirDemandas(){
+        String filaDemandas="Fila em ordem de criação de demandas:";
+        int i=0;
+        for (Demanda d:demandas){
+            filaDemandas+= "\n" + ++i + " - " + d.getTipoProduto() + " (x" + d.getQuantidadeProdutos() + ")";
+        }
+        return filaDemandas;
     }
 }

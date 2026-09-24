@@ -1,5 +1,5 @@
 import java.util.List;
-public class EStrategiaMaiorDemanda implements EstrategiaProducao{
+public class EstrategiaMaiorDemanda implements EstrategiaProducao{
     @Override 
     public Demanda selecionarDemanda(List<Demanda> demandas, double orcamentoDisponivel){
         Demanda aux = null;

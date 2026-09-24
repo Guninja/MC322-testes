@@ -3,14 +3,14 @@ public abstract class Maquina {
     private boolean ligada=false; //é o status da máquina se on/off
     private int capacidadeMaxima;//capacidade de guardar matéria prima usada na produção atual
     private float probabilidadeFalha;
-    private float custOperacao;
+    private int custoOperacao;
     private float saude;//sem health, aqui é Brasil
 
     public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, int custoOperacao){
         nome=nomeado;
         capacidadeMaxima=capacidade;
         probabilidadeFalha = probabilidadeDefalha;
-        this.custOperacao = custoOperacao;
+        this.custoOperacao = custoOperacao;
         saude = 100.0f;
     }
 

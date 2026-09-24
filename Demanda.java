@@ -2,6 +2,7 @@ public class Demanda {
     private String tipoProduto;
     private int quantidadeProdutos;
     private StatusDemanda status;
+    private int custoProducaoUnitario;
 
     public Demanda(String tipoMetal, int quantosProdutos){
         tipoProduto = tipoMetal;
@@ -47,12 +48,17 @@ public class Demanda {
                 return "Tarde demais, ja esta finalizada";
             }
     }
+    
+    public void setCustoProducaoUnitario(int custo) {
+        this.custoProducaoUnitario = custo;
+    }
+
     public StatusDemanda getStatus(){
         return status;
     }
 
-    public float getOrcamentoNecessario(float custoMaquinas){
-        return quantidadeProdutos * custoMaquinas;
+    public float getOrcamentoNecessario(){
+        return (float) quantidadeProdutos * custoProducaoUnitario;
     }
 
     public  String getTipoProduto(){

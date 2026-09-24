@@ -55,7 +55,7 @@ public class Main {
             menu="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nFÁBRICA DE LATARIA DE CARRO\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
             menu+="\nMATÉRIA-PRIMA(MP): "+metal.getNome()+" ("+metal.getUnidade()+")\n";
             menu+="\nLATARIAS POSSÍVEIS: Blindada, Galvanizada e Chapa bruta";
-            menu+="\nESTRATEGIA ATUAL: "+estrategiaPadrao.getNome();
+            menu+="\nESTRATEGIA ATUAL: "+estrategiaPadrao.getNomeEstrategia();
             menu+="\nCENARIO ATIVO: "+cenarioAtual;
             menu+="\nSALDO ATUAL: "+gerente.exibirBudget();
             menu+="\n\n\n__________________________\nMENU PRINCIPAL\n__________________________";
@@ -178,7 +178,7 @@ public class Main {
                                 System.out.println("Estratégia alterada para maior demanda!");
                                 break;
                             case 3:
-                                estrategiaPadrao=new EstrategiaMaximoProdutos();
+                                estrategiaPadrao=new EstrategiaMaxProdutos();
                                 gerente.setEstrategia(estrategiaPadrao);
                                 System.out.println("Estratégia alterada para maximo produtos!");
                                 break;

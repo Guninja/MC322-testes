@@ -9,8 +9,7 @@ public class Demanda {
         status = StatusDemanda.PENDENTE;
     }
 
-    public int atualizardemanda(int demanda){
-        ProducaoIniciada();
+    public int atualizarDemanda(int demanda){
         quantidadeProdutos = quantidadeProdutos + demanda;
         if(quantidadeProdutos == 0){
             ProducaoFinalizada();
@@ -18,7 +17,7 @@ public class Demanda {
         return quantidadeProdutos;
     }
 
-    public int calcularMPnecessaria(int quantidadeMPporunidade ){
+    public int calcularMPnecessaria(int quantidadeMPporunidade){
         int MPnecessaria = quantidadeMPporunidade * quantidadeProdutos;
         return MPnecessaria;
     }
@@ -52,6 +51,14 @@ public class Demanda {
     }
 
 
+
+    public int getQuantidadeProdutos(){
+        return quantidadeProdutos;
+    }
+
+    public String getTipoProduto(){
+        return tipoProduto;
+    }
 
     public int getQuantidadeProdutos(){
         return quantidadeProdutos;

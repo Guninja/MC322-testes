@@ -1,15 +1,19 @@
 public class Demanda {
     private String tipoProduto;
     private int quantidadeProdutos;
-    private boolean atendida = false;
+    private StatusDemanda status;
 
     public Demanda(String tipoMetal, int quantosProdutos){
         tipoProduto = tipoMetal;
         quantidadeProdutos = quantosProdutos;
+        status = StatusDemanda.PENDENTE;
     }
 
     public int atualizarDemanda(int demanda){
         quantidadeProdutos = quantidadeProdutos + demanda;
+        if(quantidadeProdutos == 0){
+            ProducaoFinalizada();
+        }
         return quantidadeProdutos;
     }
 
@@ -18,12 +22,38 @@ public class Demanda {
         return MPnecessaria;
     }
 
-    public boolean atender(){
-        if (quantidadeProdutos == 0) {
-            atendida = true;
-            System.out.println("Demanda atendida!!!");
-        }
-        return atendida;
+    public String ProducaoIniciada(){
+        if(status == StatusDemanda.PENDENTE){
+            status = StatusDemanda.EM_PRODUCAO;
+            return "Em produção...";
+        } else{
+            return "Não tem como começar essa demanda";
+        }       
+    }
+    public String ProducaoFinalizada(){
+        if(status == StatusDemanda.EM_PRODUCAO){
+            status = StatusDemanda.CONCLUIDA;
+            return "Demanda finalizada :)";
+        } else{
+            return "Calma, essa demanda nao está sendo produzida";
+        }       
+    }
+    public String ProducaoCancelada(){
+            if(status != StatusDemanda.CONCLUIDA){
+                status = StatusDemanda.CANCELADA;
+                return "Que pena. Essa demanda está cancelada :(";
+            } else{
+                return "Tarde demais, ja esta finalizada";
+            }
+    }
+    public StatusDemanda getStatus(){
+        return status;
+    }
+
+
+
+    public int getQuantidadeProdutos(){
+        return quantidadeProdutos;
     }
 
     public String getTipoProduto(){

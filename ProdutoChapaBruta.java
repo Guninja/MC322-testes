@@ -1,10 +1,10 @@
 public class ProdutoChapaBruta extends Produto {
     public ProdutoChapaBruta(String identificacao, String nomezinho){
-        super(identificacao,nomezinho, 0.5f);
+        super(identificacao,nomezinho, 0.5f, 1);
     }
 
     public boolean processar(){
-        setStatus("produzido");
+        setStatus(StatusProduto.PRODUZIDO);
         System.out.println("Produto produzido...");
         return true;
     }

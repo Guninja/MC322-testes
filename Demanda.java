@@ -18,7 +18,7 @@ public class Demanda {
         return quantidadeProdutos;
     }
 
-    public int calcularMPnecessaria(int quantidadeMPporunidade ){
+    public int calcularMPnecessaria(int quantidadeMPporunidade){
         int MPnecessaria = quantidadeMPporunidade * quantidadeProdutos;
         return MPnecessaria;
     }

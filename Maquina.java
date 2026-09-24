@@ -6,7 +6,7 @@ public abstract class Maquina {
     private float custOperacao;
     private float saude;//sem health, aqui é Brasil
 
-    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, float custoOperacao){
+    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, int custoOperacao){
         nome=nomeado;
         capacidadeMaxima=capacidade;
         probabilidadeFalha = probabilidadeDefalha;
@@ -63,8 +63,8 @@ public abstract class Maquina {
         return ligada;
     }
 
-    public float getcustOperacao(){
-        return custOperacao;
+    public int getCustoOperacao(){
+        return custoOperacao;
     }
 
     public int getCapacidadeMaxima() {

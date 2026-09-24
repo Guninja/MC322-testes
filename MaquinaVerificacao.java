@@ -1,11 +1,11 @@
-public class MaquinadeCorteLazer extends Maquina {
-    public MaquinadeCorteLazer(String nomeMaq, int capMax, float prob, float custoOpe){
+public class MaquinaVerificacao extends Maquina {
+    public MaquinaVerificacao (String nomeMaq, int capMax, float prob, int custoOpe){
         super(nomeMaq, capMax, prob, custoOpe);
     }
 
 
     public boolean processar(Produto obraPrima, MateriaPrima material){
-        int demandaMaterial=obraPrima.getDemandaMateriaPrima();
+        int demandaMaterial=obraPrima.getQuantidadeMateriaPrimaPorUnidade();
         if(!estaLigada()){
             System.out.println("Produto não processado, poxa, a máquina está desligada!");
         }else if(getCapacidadeMaxima()<demandaMaterial){
@@ -13,16 +13,21 @@ public class MaquinadeCorteLazer extends Maquina {
         }else if(material.consumir(demandaMaterial)){
             desgate();
             if (verificarFalha()){
-               obraPrima.aumentarProbabilidadeFalha(0.06); 
+               System.out.println("Produto reprovado e descartado, não passou nos testes de inspeção");
+                return false; 
+            }
+            if (Math.random() < obraPrima.getProbabilidadeFalha()){
+                System.out.println("Produto reprovado e descartado, não passou nos testes de inspeção");
+                return false;
             }
             return obraPrima.processar();
         }else{
             System.out.println("Falta estoqueeee!!! Máquina não processou");
-        }return false;
+        }
+        return false;
     }
 
-
     public String getTipo(){
-        return "Maquina de corte a Lazer";
+        return "Maquina de Verificação";
     }
 }

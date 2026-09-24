@@ -9,7 +9,7 @@ public class Demanda {
         status = StatusDemanda.PENDENTE;
     }
 
-    public int atualizardemanda(int demanda){
+    public int atualizarDemanda(int demanda){
         ProducaoIniciada();
         quantidadeProdutos = quantidadeProdutos + demanda;
         if(quantidadeProdutos == 0){
@@ -51,8 +51,14 @@ public class Demanda {
         return status;
     }
 
+    public float getOrcamentoNecessario(float custoMaquinas){
+        return quantidadeProdutos * custoMaquinas;
+    }
 
-
+    public  String getTipoProduto(){
+        return tipoProduto;
+    }
+    
     public int getQuantidadeProdutos(){
         return quantidadeProdutos;
     }

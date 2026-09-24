@@ -11,6 +11,7 @@ public class MaquinadeVerificacao extends Maquina {
         }else if(getCapacidadeMaxima()<demandaMaterial){
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         }else if(material.consumir(demandaMaterial)){
+            desgate();
             if (verificarFalha()){
                System.out.println("Produto de baixa qualidade, não passou nos testes de inspeção");
                 return false; 

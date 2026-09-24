@@ -10,6 +10,7 @@ public class MaquinaPrensaEstampagem extends Maquina {//é o processo de moldage
         }else if(getCapacidadeMaxima()<demandaMaterial){
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         }else if(material.consumir(demandaMaterial)){
+            desgate();
             if (verificarFalha()){
                obraPrima.aumentarProbabilidadeFalha(0.07f); 
             }

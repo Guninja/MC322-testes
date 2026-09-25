@@ -110,7 +110,7 @@ public class GerenciadorProducao {
         for (Maquina m : maquinas) {
             relatorio+=m.gerarRelatorioDiagnostico();
         }
-        relatorio+="PRODUTOS FABRICADOS: ";
+        relatorio+="\nPRODUTOS FABRICADOS: ";
         for (Produto p : produtosFabricados) {
             relatorio+=p.gerarRelatorioDiagnostico();
         }

@@ -17,7 +17,7 @@ public class GerenciadorProducao {
     }
 
     public void registrarDemanda(Demanda novaDemanda){
-        int custoDasMaquinas = this.calcularCustoProdução();
+        int custoDasMaquinas = this.calcularCustoProducao();
         novaDemanda.setCustoProducaoUnitario(custoDasMaquinas);
         demandas.add(novaDemanda);
     }

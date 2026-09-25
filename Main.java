@@ -7,8 +7,8 @@ public class Main {
         printe+="\n1 - Ideal (orçamento bom, desgaste padrão)\n2 - Apocalíptico (orçamento baixíssimo, desgastes enormes)";
         System.out.println(printe);
         boolean escolhaAtiva=true;
-        Cenario cenarioEscolhido;
-        String cenarioAtual;
+        Cenario cenarioEscolhido = null;
+        String cenarioAtual="";
         while(escolhaAtiva){
             while(!entrada.hasNextInt()){
                 System.out.println("Tente numeros apenas!");

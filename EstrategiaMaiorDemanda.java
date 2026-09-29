@@ -1,5 +1,5 @@
 import java.util.List;
-public class EStrategiaMaiorDemanda implements EstrategiaProducao{
+public class EstrategiaMaiorDemanda implements EstrategiaProducao{
     @Override 
     public Demanda selecionarDemanda(List<Demanda> demandas, double orcamentoDisponivel){// le  a lista de demanda e faz com que a demanda com mais itens a ser produzidos seja atendida primeiro
         Demanda aux = null;

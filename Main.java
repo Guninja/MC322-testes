@@ -210,5 +210,6 @@ public class Main {
                 entrada.next();
             }
         }
+        entrada.close();
     }
 }

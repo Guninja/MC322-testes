@@ -16,13 +16,13 @@ public class GerenciadorProducao {
         budget = dinheiro;
     }
 
-    public void registrarDemanda(Demanda novaDemanda){
+    public void registrarDemanda(Demanda novaDemanda){//adiciona demanda registrada agora na fila de demandas
         int custoDasMaquinas = this.calcularCustoProducao();
         novaDemanda.setCustoProducaoUnitario(custoDasMaquinas);
         demandas.add(novaDemanda);
     }
 
-    public void adicionarMaquina(Maquina maquininha){
+    public void adicionarMaquina(Maquina maquininha){//maquininha existe, gerenciado agora sabe
         maquinas.add(maquininha);
     }
 

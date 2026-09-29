@@ -25,6 +25,8 @@ public abstract class Maquina {
     public void ligar(){
         if(saude <= 0){
             System.out.println("maquina quebrada");
+            System.out.println("Consertanto...");
+            reparar();
         }else{
             ligada=true;
             System.out.println("Máquina Ligada...");

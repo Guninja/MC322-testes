@@ -13,3 +13,10 @@ Tarefa 2:
  Pensamos tambem em envolver as maquinas que já são usadas na indústria, mais uma de inspeção. A primeira faria o esqueleto da lataria, a segunda os cortes necessarios e por fim a verificação. 
  No menu de produção tem as funcionalidades de atualizar demandas que enfilera os produtos em ordem que foi solicitada pelo usuario.
  Para fabricar existe uma funcionalidade que desenfilera a fila de demanda de produção.
+
+ Tarefa 3:
+ Desde a tarefa 2 fabricamos latarias completas mas de diferentes tipos(chapa bruta, galvanizada, blindada), porém foi adicionado mecânicas de cenário ideal ou apocalíptico que alteram o saldo inicial e fatores de falha e desgaste.
+ Foi adicionado um mecanismo de escolha de preferência para produzir, então ao fabricar será verificado qual preferência está ativa e será fabricado a partir disso, sendo possível escolher entre ordem FIFO de chegada padrão, maior tamanho da demanda em questão de produtos solicitados ou produzir o máximo de demandas em fila.
+ O código respeita POO usando enum para representar textos de status e coisas do tipo. Também foi adicionado uma auditoria que certificou em relatório o estado de saúde das máquinas de produtos de forma simplificada.
+ As máquinas têm desgaste progressivo por uso e é possível ver o relatório geral no menu.
+ Por último, foi implementado mecanismos de submenus para o sistema ficar mais intuitivo e interativo com o usuário.

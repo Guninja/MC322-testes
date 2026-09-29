@@ -16,29 +16,29 @@ public class GerenciadorProducao {
         budget = dinheiro;
     }
 
-    public void registrarDemanda(Demanda novaDemanda){//adiciona demanda registrada agora na fila de demandas
+    public void registrarDemanda(Demanda novaDemanda){ //adiciona demanda registrada agora na fila de demandas
         int custoDasMaquinas = this.calcularCustoProducao();
         novaDemanda.setCustoProducaoUnitario(custoDasMaquinas);
         demandas.add(novaDemanda);
     }
 
-    public void adicionarMaquina(Maquina maquininha){//maquininha existe, gerenciado agora sabe
+    public void adicionarMaquina(Maquina maquininha){ //maquininha existe, gerenciador agora sabe
         maquinas.add(maquininha);
     }
 
     public boolean executarProximaProducao(){
-        if (estrategiaAtual==null){//proteção pra se nao houver estrategia escolhida
+        if (estrategiaAtual==null){ //proteção pra se nao houver estrategia escolhida
             System.out.println("Erro, nenhuma estratégia definida\nDEFINA UMA ESTRATEGIA ANTES DE FABRICAR");
             return false;
         }
         Demanda demandaAtual=estrategiaAtual.selecionarDemanda(demandas, budget);
-        if (demandaAtual==null) {//proteção pra possivel demanda vazia
+        if (demandaAtual==null) { //proteção pra possivel demanda vazia
             System.out.println("Erro ao encontrar demanda viável!(falta orçamento ou demanda na fila) Tentativa de fabricar falhou!"); 
             return false;
         }
         Produto produto = null;
         String idGerado= "PROD"+ (produtosFabricados.size() + 1);
-        switch (demandaAtual.getTipoProduto()){
+        switch (demandaAtual.getTipoProduto()){ //o que produzir Demanda?
             case "ProdutoChapaBruta":
                 produto = new ProdutoChapaBruta(idGerado, "ProdutoChapaBruta");
                 break;
@@ -51,7 +51,7 @@ public class GerenciadorProducao {
             default:
                 return false;
         }
-        for (Maquina m : maquinas) {
+        for (Maquina m : maquinas) { //mandando pras maquinassss
             m.ligar();
             this.budget -= m.getCustoOperacao();
             if (!m.processar(produto, materiaPrima)) {
@@ -67,7 +67,7 @@ public class GerenciadorProducao {
         return true;
     }
 
-    public void comprarMateriaPrima(int quantidade, int precoUnitario){
+    public void comprarMateriaPrima(int quantidade, int precoUnitario){ //bora gastar com MP
         int custoTotal = quantidade * precoUnitario;
         if(budget >= custoTotal){
             budget -= custoTotal;
@@ -78,14 +78,14 @@ public class GerenciadorProducao {
     }
 
     public void setEstrategia(EstrategiaProducao estrategiaNova){
-        this.estrategiaAtual=estrategiaNova;
+        this.estrategiaAtual=estrategiaNova; //sera que é a melhor? kskks
     }
 
     public String exibirBudget(){
-        return budget + " Robux";
+        return budget + " Robux"; //referencia a algo... entendeu?
     }
 
-    public String exibirArmazem(){
+    public String exibirArmazem(){ //string de relatorio do armazem com produtos
         String relatorio = "--- ARMAZÉM DE PRODUTOS ---\n\nProdutos Fabricados: ( " + produtosFabricados.size() + " unidade(s) )\n";
         for (Produto p : produtosFabricados) {
             relatorio += "- " + p.getNome() + " | Qualidade: " + p.getTipo() + " (" + p.getQualidade()*100 + "%) | LoteID: " + p.getId() + " | Status: " + p.getRisco() +"\n";
@@ -93,11 +93,11 @@ public class GerenciadorProducao {
         return relatorio;
     }
 
-    public String exibirEstoqueMateriaPrima(){
+    public String exibirEstoqueMateriaPrima(){ //estoque das MP
         return "\n---ESTOQUE MATERIA-PRIMA ---\n\nMatéria-Prima (" + materiaPrima.getNome() + "): " + materiaPrima.getQuantidade() + "\n";
     } 
 
-    public int calcularCustoProducao(){
+    public int calcularCustoProducao(){ //quanto custa rodar as maquinas?
         int custoTotal = 0;
         for (Maquina m : maquinas) {
             custoTotal += m.getCustoOperacao();
@@ -105,7 +105,7 @@ public class GerenciadorProducao {
         return custoTotal;
     }
 
-    public String gerarRelatorioDiagnostico(){
+    public String gerarRelatorioDiagnostico(){ //relatorio de diagnostico solicitado pras maquinas e produtos
         String relatorio="--- RELATÓRIO DE AUDITORIA DA FÁBRICA ---\nMAQUINAS: ";
         for (Maquina m : maquinas) {
             relatorio+=m.gerarRelatorioDiagnostico();
@@ -117,7 +117,7 @@ public class GerenciadorProducao {
         return relatorio;
     }
 
-    public String exibirDemandas(){
+    public String exibirDemandas(){ //mostrar fila de demandas atual pro usuario
         String filaDemandas="Fila em ordem de criação de demandas:";
         int i=0;
         for (Demanda d:demandas){

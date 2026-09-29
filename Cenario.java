@@ -1,4 +1,4 @@
-public enum Cenario {
+public enum Cenario { //onde estamos hollywood, ceu ou inferno?
     IDEAL (10000, 0.05f, 1),
     APOCALIPTICO (300, 0.40f, 6);
 
@@ -12,15 +12,15 @@ public enum Cenario {
         this.fatorDesgaste=fatorDesgaste;
     }
 
-    public int getBudgetInicial(){
+    public int getBudgetInicial(){ //saldo positivo pra nao se individar
         return budgetInicial;
     }
 
-    public float getFatorFalha(){
+    public float getFatorFalha(){ //esse ai falha demais, slc
         return fatorFalha;
     }
 
-    public int getFatorDesgaste(){
+    public int getFatorDesgaste(){ //horrivel quando nao produz, isso é a origem do problema
         return fatorDesgaste;
     }
 }

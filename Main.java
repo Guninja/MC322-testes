@@ -3,19 +3,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner entrada=new Scanner(System.in);
-        String printe="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nESCOLHA DE CENÁRIO DA FÁBRICA\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
+        String printe="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nESCOLHA DE CENÁRIO DA FÁBRICA\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";//iniciei variavel string para printar tudo de uma vez em um só println
         printe+="\n1 - Ideal (orçamento bom, desgaste padrão)\n2 - Apocalíptico (orçamento baixíssimo, desgastes enormes)";
         System.out.println(printe);
-        boolean escolhaAtiva=true;
+        boolean escolhaAtiva=true;//iniciando variaveis auxiliares pro menu
         Cenario cenarioEscolhido = null;
         String cenarioAtual="";
         while(escolhaAtiva){
-            while(!entrada.hasNextInt()){
+            while(!entrada.hasNextInt()){//proteção para aceitar apenas numeros de entrada na escolha de cenario
                 System.out.println("Tente numeros apenas!");
                 entrada.next();
             }
             int opcaoCenario=entrada.nextInt();
-            switch (opcaoCenario) {
+            switch (opcaoCenario) {//escolha de cenario do usuario aplicada
                 case 1:
                     cenarioEscolhido=Cenario.IDEAL;
                     cenarioAtual="Ideal";
@@ -31,14 +31,14 @@ public class Main {
                     break;
             }
         }
-        int budgetInicial = cenarioEscolhido.getBudgetInicial();
+        int budgetInicial = cenarioEscolhido.getBudgetInicial();//iniciando mais variaveis com a escolha do cenario
         int fatorDesgaste = cenarioEscolhido.getFatorDesgaste();
-        float fatorFalha = cenarioEscolhido.getFatorFalha();
+        float fatorFalha = cenarioEscolhido.getFatorFalha();// depois esta sendo instanciado os objetos da fabrica
         MateriaPrima metal=new MateriaPrima("MeBA", "Metal", "m^2", 0, 5);//será que é aço ou európio??? nunca saberemos... mas ambos são caros
         GerenciadorProducao gerente=new GerenciadorProducao(budgetInicial,metal);//esse objeto sabe muito...
-        MaquinaPrensaEstampagem prensa=new MaquinaPrensaEstampagem("Prensa de Estampagem", 20, fatorFalha, 1);
-        MaquinaCorteLaser cnc=new MaquinaCorteLaser("CNC Corte Laser em metal", 10, fatorFalha, 2);//cnc laser é cara pra funcionar
-        MaquinaVerificacao inspecao=new MaquinaVerificacao("Inspeção", 30, fatorFalha, 1);
+        MaquinaPrensaEstampagem prensa=new MaquinaPrensaEstampagem("Prensa de Estampagem", 20, fatorFalha, 1, fatorDesgaste);
+        MaquinaCorteLaser cnc=new MaquinaCorteLaser("CNC Corte Laser em metal", 10, fatorFalha, 2, fatorDesgaste);//cnc laser é cara pra funcionar
+        MaquinaVerificacao inspecao=new MaquinaVerificacao("Inspeção", 30, fatorFalha, 1, fatorDesgaste);
         gerente.adicionarMaquina(prensa);
         gerente.adicionarMaquina(cnc);
         gerente.adicionarMaquina(inspecao);
@@ -47,11 +47,11 @@ public class Main {
         String lataCB="ProdutoChapaBruta";
         String[] listaProdutos={lataB, lataG, lataCB};
         EstrategiaProducao estrategiaPadrao = new EstrategiaOrdemChegada();
-        gerente.setEstrategia(estrategiaPadrao);
-        String menu;
+        gerente.setEstrategia(estrategiaPadrao);//definindo estrategia padrao como ordem de chegada
+        String menu;//mais variaveis basicas iniciadas ksksks
         String erroNaoInt="\nErro! Digite apenas números inteiros";
         boolean menuAtivo=true;//esse é o estagiario, o famoso aux  :o
-        while(menuAtivo){
+        while(menuAtivo){// grandissisimo menu
             menu="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nFÁBRICA DE LATARIA DE CARRO\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
             menu+="\nMATÉRIA-PRIMA(MP): "+metal.getNome()+" ("+metal.getUnidade()+")\n";
             menu+="\nLATARIAS POSSÍVEIS: Blindada, Galvanizada e Chapa bruta";
@@ -65,12 +65,12 @@ public class Main {
             menu+="\n\n4 -> Ver estoque ou armazém";
             menu+="\n\n5 -> Alterar estratégia de produção";
             menu+="\n\n6 -> Relatório de auditoria";
-            menu+="\n\n0 -> SAIR";
+            menu+="\n\n0 -> SAIR";//tentei estruturar bonito o menu aqui no codigo, algo mais estetico para programador
             System.out.print(menu + "\nESCOLHA: ");
             if(entrada.hasNextInt()){//filtro para aceitar apenas int na escolha do menu
                 int opcao=entrada.nextInt();
                 switch(opcao){//primeiro switch, escolha do menu  principal
-                    case 1:
+                    case 1://comprar MP
                         System.out.print("Digite quantas unidades (" + metal.getUnidade() + ") de "+metal.getNome()+" deseja comprar: ");
                         if(entrada.hasNextInt()){
                             int quantidadeComprando=entrada.nextInt();
@@ -79,7 +79,7 @@ public class Main {
                             System.out.println("Compra não realizada,"+erroNaoInt);
                             entrada.next();
                         }break;
-                    case 2:
+                    case 2://Cadastro de demanda
                         menu="\n--- ATUALIZAÇÃO DE DEMANDA ---\n1 -> Lataria Blindada\n2 -> Lataria Galvanizada\n3 -> Lataria Chapa Bruta";
                         menu+="\n4 -> Ver fila de demandas\n0 -> Voltar\nESCOLHA: ";
                         System.out.println(menu);
@@ -88,7 +88,7 @@ public class Main {
                             break;
                         }
                         opcao=entrada.nextInt();
-                        switch (opcao) {
+                        switch (opcao) {//submenu de escolha de demanda
                             case 1://Lataria Blindada selecionada
                                 System.out.print("\n-CRIANDO DEMANDA DE BLINDADO-\nQuanto deseja fabricar: ");
                                 if(entrada.hasNextInt()){
@@ -119,7 +119,7 @@ public class Main {
                                     System.out.println("Demanda não atualizada,"+erroNaoInt);
                                     entrada.next();
                                 }break;
-                            case 4:
+                            case 4://adicional para mostrar a fila atual
                                 System.out.println(gerente.exibirDemandas());
                                 break;
                             case 0:
@@ -166,7 +166,7 @@ public class Main {
                             break;
                         }
                         opcao=entrada.nextInt();
-                        switch (opcao) {
+                        switch (opcao) {//submenu das estrategias
                             case 1:
                                 estrategiaPadrao=new EstrategiaOrdemChegada();
                                 gerente.setEstrategia(estrategiaPadrao);
@@ -193,11 +193,11 @@ public class Main {
                     case 6://Relatório de auditoria
                         System.out.println(gerente.gerarRelatorioDiagnostico());
                         break;
-                    case 0:
+                    case 0://fechar tudooo!
                         System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
                         menuAtivo=false;
                         break;
-                    default:
+                    default://usuario digitou outro numero
                         System.out.println("Tente um número válido!");
                         break;
                 }
@@ -205,7 +205,7 @@ public class Main {
                 System.out.println(erroNaoInt);
                 entrada.next();
             }
-            if (menuAtivo){
+            if (menuAtivo){//pausa estrategica para ler a reação do sistema antes de voltar ao menu principal
                 System.out.print("\nDIGITE QUALQUER COISA PARA VOLTAR AO MENU...\n");
                 entrada.next();
             }

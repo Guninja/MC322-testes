@@ -1,4 +1,4 @@
-public enum StatusDemanda {
+public enum StatusDemanda { //demanda criada, produzindo, realizada ou cancelada
     PENDENTE ("Demandas em aberto, esperando produção"),
     EM_PRODUCAO ("Demandas sendo produzidas"),
     CONCLUIDA ("Demandas de já produzidas"),

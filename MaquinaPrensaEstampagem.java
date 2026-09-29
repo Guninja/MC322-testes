@@ -1,6 +1,6 @@
 public class MaquinaPrensaEstampagem extends Maquina {//é o processo de moldagem da lataria dos carros
-    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, int custoOpe){
-        super(nomeMaq, capMax, prob, custoOpe);
+    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, int custoOpe, int fatorDesgaste){
+        super(nomeMaq, capMax, prob, custoOpe, fatorDesgaste);
     }
 
     public boolean processar(Produto obraPrima, MateriaPrima material){
@@ -10,7 +10,7 @@ public class MaquinaPrensaEstampagem extends Maquina {//é o processo de moldage
         }else if(getCapacidadeMaxima()<demandaMaterial){
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         }else if(material.consumir(demandaMaterial)){
-            desgate();
+            desgate(); // aplica o desgate na maquina
             if (verificarFalha()){
                obraPrima.aumentarProbabilidadeFalha(0.07f); 
             }

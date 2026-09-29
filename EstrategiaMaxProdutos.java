@@ -1,7 +1,7 @@
 import java.util.List;
 public class EstrategiaMaxProdutos implements EstrategiaProducao{
     @Override 
-    public Demanda selecionarDemanda(List<Demanda> demandas, double orcamentoDisponivel){
+    public Demanda selecionarDemanda(List<Demanda> demandas, double orcamentoDisponivel){ // le a lista de demanda e faz com que a demanda que vai produzir mais por quantidade de dinheiro seja produzida primeiro 
         Demanda aux = null;
         for(int i = 0; i < demandas.size(); i++){
             if (demandas.get(i).getStatus() == StatusDemanda.PENDENTE && demandas.get(i).getOrcamentoNecessario() <= orcamentoDisponivel) {//confere se a demanda esta pendente e se tem dinheiro

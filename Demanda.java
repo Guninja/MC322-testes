@@ -24,7 +24,7 @@ public class Demanda {
         return MPnecessaria;
     }
 
-    public String ProducaoIniciada(){
+    public String ProducaoIniciada(){ // metodo de transiçao de estado, demanda entra em produçao
         if(status == StatusDemanda.PENDENTE){
             status = StatusDemanda.EM_PRODUCAO;
             return "Em produção...";
@@ -32,7 +32,7 @@ public class Demanda {
             return "Não tem como começar essa demanda";
         }       
     }
-    public String ProducaoFinalizada(){
+    public String ProducaoFinalizada(){ // metodo de transiçao de estado, demanda e finalizada
         if(status == StatusDemanda.EM_PRODUCAO){
             status = StatusDemanda.CONCLUIDA;
             return "Demanda finalizada :)";
@@ -40,7 +40,7 @@ public class Demanda {
             return "Calma, essa demanda nao está sendo produzida";
         }       
     }
-    public String ProducaoCancelada(){
+    public String ProducaoCancelada(){ // metodo de transiçao de estado, demanda é cancelada
             if(status != StatusDemanda.CONCLUIDA){
                 status = StatusDemanda.CANCELADA;
                 return "Que pena. Essa demanda está cancelada :(";
@@ -57,7 +57,7 @@ public class Demanda {
         return status;
     }
 
-    public float getOrcamentoNecessario(){
+    public float getOrcamentoNecessario(){ // valor de custo necessario pra cada demanda
         return (float) quantidadeProdutos * custoProducaoUnitario;
     }
 

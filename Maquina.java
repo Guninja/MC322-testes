@@ -5,20 +5,22 @@ public abstract class Maquina {
     private float probabilidadeFalha;
     private int custoOperacao;
     private float saude;//sem health, aqui é Brasil
+    private int fatorDesgaste;
 
-    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, int custoOperacao){
+    public Maquina(String nomeado, int capacidade, float probabilidadeDefalha, int custoOperacao, int fatorDesgaste){
         nome=nomeado;
         capacidadeMaxima=capacidade;
         probabilidadeFalha = probabilidadeDefalha;
         this.custoOperacao = custoOperacao;
         saude = 100.0f;
+        this.fatorDesgaste = fatorDesgaste;
     }
 
     public abstract boolean processar(Produto obraPrima, MateriaPrima material);
 
     public abstract String getTipo();
 
-    public boolean precisaManutencao(){
+    public boolean precisaManutencao(){ //define se precisa ou nao de manutençao
         return saude < 20.0f;
     }
 
@@ -38,15 +40,15 @@ public abstract class Maquina {
         System.out.println("Máquina desligada...");
     }
 
-    protected void desgate(){
-        float reducao =(float) (3 * Math.random());
+    protected void desgate(){ //desgate aleatorio da maquina
+        float reducao =(float) (fatorDesgaste * Math.random());
         saude = saude - reducao;
         if (saude < 0){
             saude = 0;
         }
     }
 
-    protected boolean verificarFalha(){
+    protected boolean verificarFalha(){ // deixa a probabilidade de falhar inversamente proporcional a saude
         if (saude <= 0) return true;
         float chanceFalhar = probabilidadeFalha + (1.0f - probabilidadeFalha) * ((100.0f - saude) / 100.0f);
         return Math.random() < chanceFalhar;
@@ -79,7 +81,7 @@ public abstract class Maquina {
 
 
 
-    public String gerarRelatorioDiagnostico(){
+    public String gerarRelatorioDiagnostico(){ //gera string de relatorio com nome, saude, risco de falha e status.
         String textoDiagnostico = precisaManutencao() ? "Máquina com defeito: precisa de manutenção" : "Manutenção em dia :)";
         return "\n | Máquina: "+nome+" | Saúde: "+saude+" | Risco de Falha: "+probabilidadeFalha+" | Status: "+textoDiagnostico;
     }  

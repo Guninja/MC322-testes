@@ -1,15 +1,21 @@
 public class Demanda {
     private String tipoProduto;
     private int quantidadeProdutos;
-    private boolean atendida = false;
+    private StatusDemanda status;
+    private int custoProducaoUnitario;
 
     public Demanda(String tipoMetal, int quantosProdutos){
         tipoProduto = tipoMetal;
         quantidadeProdutos = quantosProdutos;
+        status = StatusDemanda.PENDENTE;
     }
 
     public int atualizarDemanda(int demanda){
+        ProducaoIniciada();
         quantidadeProdutos = quantidadeProdutos + demanda;
+        if(quantidadeProdutos == 0){
+            ProducaoFinalizada();
+        }
         return quantidadeProdutos;
     }
 
@@ -18,18 +24,47 @@ public class Demanda {
         return MPnecessaria;
     }
 
-    public boolean atender(){
-        if (quantidadeProdutos == 0) {
-            atendida = true;
-            System.out.println("Demanda atendida!!!");
-        }
-        return atendida;
+    public String ProducaoIniciada(){ // metodo de transiçao de estado, demanda entra em produçao
+        if(status == StatusDemanda.PENDENTE){
+            status = StatusDemanda.EM_PRODUCAO;
+            return "Em produção...";
+        } else{
+            return "Não tem como começar essa demanda";
+        }       
+    }
+    public String ProducaoFinalizada(){ // metodo de transiçao de estado, demanda e finalizada
+        if(status == StatusDemanda.EM_PRODUCAO){
+            status = StatusDemanda.CONCLUIDA;
+            return "Demanda finalizada :)";
+        } else{
+            return "Calma, essa demanda nao está sendo produzida";
+        }       
+    }
+    public String ProducaoCancelada(){ // metodo de transiçao de estado, demanda é cancelada
+            if(status != StatusDemanda.CONCLUIDA){
+                status = StatusDemanda.CANCELADA;
+                return "Que pena. Essa demanda está cancelada :(";
+            } else{
+                return "Tarde demais, ja esta finalizada";
+            }
+    }
+    
+    public void setCustoProducaoUnitario(int custo) {
+        this.custoProducaoUnitario = custo;
     }
 
-    public String getTipoProduto(){
+    public StatusDemanda getStatus(){
+        return status;
+    }
+
+    public float getOrcamentoNecessario(){ // valor de custo necessario pra cada demanda
+        return (float) quantidadeProdutos * custoProducaoUnitario;
+    }
+
+    public  String getTipoProduto(){
         return tipoProduto;
     }
-
+    
     public int getQuantidadeProdutos(){
         return quantidadeProdutos;
     }

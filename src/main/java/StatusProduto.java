@@ -1,4 +1,4 @@
-public enum StatusProduto {
+public enum StatusProduto { //Produto em fila ou pronto?
     PARADO ("Parado"),
     PRODUZIDO ("Produzido");
     

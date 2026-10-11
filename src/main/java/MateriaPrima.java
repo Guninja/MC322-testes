@@ -13,7 +13,7 @@ public class MateriaPrima {
         custoPorUnidade=custoDoMaterial;
     }
 
-    public boolean consumir(int demanda){
+    public boolean consumir(int demanda){ //tem MP pra gastar? br consumir
         if (verificarDisponibilidade(demanda)){
             quantidade-=demanda; //atualiza o estoque, já consumindo o demandado
             System.out.println("Estoque atualizado!");
@@ -21,7 +21,7 @@ public class MateriaPrima {
         }return false;
     }
 
-    public void adicionarEstoque(int encomenda){
+    public void adicionarEstoque(int encomenda){//mais estoqueee de MP
         if(encomenda<=0){
             System.out.println("Aviso! \nValor nulo ou negativo de encomenda de MP");
         }
@@ -31,7 +31,7 @@ public class MateriaPrima {
         }
     }
 
-    public boolean verificarDisponibilidade(int demanda){
+    public boolean verificarDisponibilidade(int demanda){ //tem MP suficiente?
         if (demanda<=0){
             System.out.println("Aviso! \nDemanda nula ou negativa");//não é pra acontecer, mas por segurança existe
         }else if(quantidade<demanda){
@@ -42,7 +42,7 @@ public class MateriaPrima {
         return false;
     }
 
-    public String getId(){
+    public String getId(){//comecou os gets
         return id;
     }
 

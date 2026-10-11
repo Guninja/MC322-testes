@@ -31,10 +31,10 @@ public abstract class Produto implements Auditavel {
         this.status=status;
     }
 
-    public void aumentarProbabilidadeFalha(float falhaMaquina){
+    public void aumentarProbabilidadeFalha(float falhaMaquina){// aumenta a falha
         probabilidadeFalhaAcumulada+=falhaMaquina;
     }
-
+// agora vem os gets
     public int getQuantidadeMateriaPrimaPorUnidade(){
         return quantidadeMateriaPrimaPorUnidade;
     }
@@ -74,7 +74,7 @@ public abstract class Produto implements Auditavel {
         return precisaManutencao() ? "precisa de manutenção!" : "manutenção em dia :)";
     }
 
-    public String gerarRelatorioDiagnostico(){
+    public String gerarRelatorioDiagnostico(){ // gera string de relatorio com nome qualidade, falha acumulada  e status
         String textoDiagnostico = precisaManutencao() ? "Lataria Danificada: precisa de manutenção!" : "Lataria com manutenção em dia :)";
         return "\n | Produto: "+nome+" | Qualidade: "+qualidade+" | Risco acumulado: "+probabilidadeFalhaAcumulada+" | Status: "+textoDiagnostico;
     }

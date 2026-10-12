@@ -69,137 +69,154 @@ public class Main {
             System.out.print(menu + "\nESCOLHA: ");
             if(entrada.hasNextInt()){//filtro para aceitar apenas int na escolha do menu
                 int opcao=entrada.nextInt();
-                switch(opcao){//primeiro switch, escolha do menu  principal
-                    case 1://comprar MP
-                        System.out.print("Digite quantas unidades (" + metal.getUnidade() + ") de "+metal.getNome()+" deseja comprar: ");
-                        if(entrada.hasNextInt()){
-                            int quantidadeComprando=entrada.nextInt();
-                            gerente.comprarMateriaPrima(quantidadeComprando,metal.getCustoPorUnidade());
-                        }else{
-                            System.out.println("Compra não realizada,"+erroNaoInt);
-                            entrada.next();
-                        }break;
-                    case 2://Cadastro de demanda
-                        menu="\n--- ATUALIZAÇÃO DE DEMANDA ---\n1 -> Lataria Blindada\n2 -> Lataria Galvanizada\n3 -> Lataria Chapa Bruta";
-                        menu+="\n4 -> Ver fila de demandas\n0 -> Voltar\nESCOLHA: ";
-                        System.out.println(menu);
-                        if(!entrada.hasNextInt()){
-                            System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
+                    try{
+                    switch(opcao){//primeiro switch, escolha do menu  principal
+                        case 1://comprar MP
+                            System.out.print("Digite quantas unidades (" + metal.getUnidade() + ") de "+metal.getNome()+" deseja comprar: ");
+                            if(entrada.hasNextInt()){
+                                int quantidadeComprando=entrada.nextInt();
+                                gerente.comprarMateriaPrima(quantidadeComprando,metal.getCustoPorUnidade());
+                            }else{
+                                System.out.println("Compra não realizada,"+erroNaoInt);
+                                entrada.next();
+                            }break;
+                        case 2://Cadastro de demanda
+                            menu="\n--- ATUALIZAÇÃO DE DEMANDA ---\n1 -> Lataria Blindada\n2 -> Lataria Galvanizada\n3 -> Lataria Chapa Bruta";
+                            menu+="\n4 -> Ver fila de demandas\n0 -> Voltar\nESCOLHA: ";
+                            System.out.println(menu);
+                            if(!entrada.hasNextInt()){
+                                System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
+                                break;
+                            }
+                            opcao=entrada.nextInt();
+                            switch (opcao) {//submenu de escolha de demanda
+                                case 1://Lataria Blindada selecionada
+                                    System.out.print("\n-CRIANDO DEMANDA DE BLINDADO-\nQuanto deseja fabricar: ");
+                                    if(entrada.hasNextInt()){
+                                        int quantidadeDemandada=entrada.nextInt();
+                                        Demanda novaDemanda=new Demanda(listaProdutos[0], quantidadeDemandada);
+                                        gerente.registrarDemanda(novaDemanda);
+                                    }else{
+                                        System.out.println("Demanda não atualizada,"+erroNaoInt);
+                                        entrada.next();
+                                    }break;
+                                case 2://Lataria Galvanizada selecionada
+                                    System.out.print("\n-CRIANDO DEMANDA DE GALVANIZADO-\nQuanto deseja fabricar: ");
+                                    if(entrada.hasNextInt()){
+                                        int quantidadeDemandada=entrada.nextInt();
+                                        Demanda novaDemanda=new Demanda(listaProdutos[1], quantidadeDemandada);
+                                        gerente.registrarDemanda(novaDemanda);
+                                    }else{
+                                        System.out.println("Demanda não atualizada,"+erroNaoInt);
+                                        entrada.next();
+                                    }break;
+                                case 3://Lataria Chapa bruta selecionada
+                                    System.out.print("\n-CRIANDO DEMANDA DE CHAPA BRUTA-\nQuanto deseja fabricar: ");
+                                    if(entrada.hasNextInt()){
+                                        int quantidadeDemandada=entrada.nextInt();
+                                        Demanda novaDemanda=new Demanda(listaProdutos[2], quantidadeDemandada);
+                                        gerente.registrarDemanda(novaDemanda);
+                                    }else{
+                                        System.out.println("Demanda não atualizada,"+erroNaoInt);
+                                        entrada.next();
+                                    }break;
+                                case 4://adicional para mostrar a fila atual
+                                    System.out.println(gerente.exibirDemandas());
+                                    break;
+                                case 0:
+                                    System.out.println("\nVoltando...");
+                                    break;
+                                default:
+                                    System.out.println("Número inválido!");
+                                    break;
+                            }
+                            break;
+                        case 3://Produzir segundo demanda atual
+                            gerente.executarProximaProducao();
+                            break;
+                        case 4://escolha de estoque para ver
+                            menu="\n--- CONSULTA DE ESTOQUE ---\n1 -> Ver Estoque de matéria-prima\n2 -> Ver armazém de produtos\n0 -> Voltar";
+                            menu+="\nESCOLHA: ";
+                            System.out.println(menu);
+                            if(!entrada.hasNextInt()){
+                                System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
+                                break;
+                            }
+                            opcao=entrada.nextInt();
+                            switch (opcao) {
+                                case 1:
+                                    System.out.println(gerente.exibirEstoqueMateriaPrima());
+                                    break;
+                                case 2:
+                                    System.out.println(gerente.exibirArmazem());
+                                    break;
+                                case 0:
+                                    System.out.println("\nVoltando...");
+                                    break;
+                                default:
+                                    System.out.println("Número inválido!");
+                                    break;
+                            }
+                            break;
+                        case 5://Alteração de estratégia
+                            menu="\n--- ALTERAR ESTRATÉGIA DE PRODUÇÃO ---\n1 -> Ordem de chegada (FIFO)\n2 -> Maior demanda (decrescente)";
+                            menu+="\n3 -> Máximo produtos (menor custo/produção)\n0 -> Voltar\nESCOLHA: ";
+                            System.out.println(menu);
+                            if(!entrada.hasNextInt()){
+                                System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
+                                break;
+                            }
+                            opcao=entrada.nextInt();
+                            switch (opcao) {//submenu das estrategias
+                                case 1:
+                                    estrategiaPadrao=new EstrategiaOrdemChegada();
+                                    gerente.setEstrategia(estrategiaPadrao);
+                                    System.out.println("Estratégia alterada para ordem de chegada!");
+                                    break;
+                                case 2:
+                                    estrategiaPadrao=new EstrategiaMaiorDemanda();
+                                    gerente.setEstrategia(estrategiaPadrao);
+                                    System.out.println("Estratégia alterada para maior demanda!");
+                                    break;
+                                case 3:
+                                    estrategiaPadrao=new EstrategiaMaxProdutos();
+                                    gerente.setEstrategia(estrategiaPadrao);
+                                    System.out.println("Estratégia alterada para maximo produtos!");
+                                    break;
+                                case 0:
+                                    System.out.println("Voltando...");
+                                    break;
+                                default:
+                                    System.out.println("Número inválido!");
+                                    break;
+                            }
+                            break;
+                        case 6://Relatório de auditoria
+                            System.out.println(gerente.gerarRelatorioDiagnostico());
+                            break;
+                        case 0://fechar tudooo!
+                            System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
+                            menuAtivo=false;
+                            break;
+                        default://usuario digitou outro numero
+                            System.out.println("Tente um número válido!");
                             break;
                         }
-                        opcao=entrada.nextInt();
-                        switch (opcao) {//submenu de escolha de demanda
-                            case 1://Lataria Blindada selecionada
-                                System.out.print("\n-CRIANDO DEMANDA DE BLINDADO-\nQuanto deseja fabricar: ");
-                                if(entrada.hasNextInt()){
-                                    int quantidadeDemandada=entrada.nextInt();
-                                    Demanda novaDemanda=new Demanda(listaProdutos[0], quantidadeDemandada);
-                                    gerente.registrarDemanda(novaDemanda);
-                                }else{
-                                    System.out.println("Demanda não atualizada,"+erroNaoInt);
-                                    entrada.next();
-                                }break;
-                            case 2://Lataria Galvanizada selecionada
-                                System.out.print("\n-CRIANDO DEMANDA DE GALVANIZADO-\nQuanto deseja fabricar: ");
-                                if(entrada.hasNextInt()){
-                                    int quantidadeDemandada=entrada.nextInt();
-                                    Demanda novaDemanda=new Demanda(listaProdutos[1], quantidadeDemandada);
-                                    gerente.registrarDemanda(novaDemanda);
-                                }else{
-                                    System.out.println("Demanda não atualizada,"+erroNaoInt);
-                                    entrada.next();
-                                }break;
-                            case 3://Lataria Chapa bruta selecionada
-                                System.out.print("\n-CRIANDO DEMANDA DE CHAPA BRUTA-\nQuanto deseja fabricar: ");
-                                if(entrada.hasNextInt()){
-                                    int quantidadeDemandada=entrada.nextInt();
-                                    Demanda novaDemanda=new Demanda(listaProdutos[2], quantidadeDemandada);
-                                    gerente.registrarDemanda(novaDemanda);
-                                }else{
-                                    System.out.println("Demanda não atualizada,"+erroNaoInt);
-                                    entrada.next();
-                                }break;
-                            case 4://adicional para mostrar a fila atual
-                                System.out.println(gerente.exibirDemandas());
-                                break;
-                            case 0:
-                                System.out.println("\nVoltando...");
-                                break;
-                            default:
-                                System.out.println("Número inválido!");
-                                break;
-                        }
-                        break;
-                    case 3://Produzir segundo demanda atual
-                        gerente.executarProximaProducao();
-                        break;
-                    case 4://escolha de estoque para ver
-                        menu="\n--- CONSULTA DE ESTOQUE ---\n1 -> Ver Estoque de matéria-prima\n2 -> Ver armazém de produtos\n0 -> Voltar";
-                        menu+="\nESCOLHA: ";
-                        System.out.println(menu);
-                        if(!entrada.hasNextInt()){
-                            System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
-                            break;
-                        }
-                        opcao=entrada.nextInt();
-                        switch (opcao) {
-                            case 1:
-                                System.out.println(gerente.exibirEstoqueMateriaPrima());
-                                break;
-                            case 2:
-                                System.out.println(gerente.exibirArmazem());
-                                break;
-                            case 0:
-                                System.out.println("\nVoltando...");
-                                break;
-                            default:
-                                System.out.println("Número inválido!");
-                                break;
-                        }
-                        break;
-                    case 5://Alteração de estratégia
-                        menu="\n--- ALTERAR ESTRATÉGIA DE PRODUÇÃO ---\n1 -> Ordem de chegada (FIFO)\n2 -> Maior demanda (decrescente)";
-                        menu+="\n3 -> Máximo produtos (menor custo/produção)\n0 -> Voltar\nESCOLHA: ";
-                        System.out.println(menu);
-                        if(!entrada.hasNextInt()){
-                            System.out.println("Falha ao atualizar demanda,"+erroNaoInt);
-                            break;
-                        }
-                        opcao=entrada.nextInt();
-                        switch (opcao) {//submenu das estrategias
-                            case 1:
-                                estrategiaPadrao=new EstrategiaOrdemChegada();
-                                gerente.setEstrategia(estrategiaPadrao);
-                                System.out.println("Estratégia alterada para ordem de chegada!");
-                                break;
-                            case 2:
-                                estrategiaPadrao=new EstrategiaMaiorDemanda();
-                                gerente.setEstrategia(estrategiaPadrao);
-                                System.out.println("Estratégia alterada para maior demanda!");
-                                break;
-                            case 3:
-                                estrategiaPadrao=new EstrategiaMaxProdutos();
-                                gerente.setEstrategia(estrategiaPadrao);
-                                System.out.println("Estratégia alterada para maximo produtos!");
-                                break;
-                            case 0:
-                                System.out.println("Voltando...");
-                                break;
-                            default:
-                                System.out.println("Número inválido!");
-                                break;
-                        }
-                        break;
-                    case 6://Relatório de auditoria
-                        System.out.println(gerente.gerarRelatorioDiagnostico());
-                        break;
-                    case 0://fechar tudooo!
-                        System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
-                        menuAtivo=false;
-                        break;
-                    default://usuario digitou outro numero
-                        System.out.println("Tente um número válido!");
-                        break;
+                    }
+                    catch (RecursoInsuficienteException e) {
+                    System.out.println("\n========================================");
+                    System.out.println("ERRO DE RECURSO");
+                    System.out.println("========================================");
+                    System.out.println(e.getMessage());
+                    System.out.println("Nenhuma alteração foi realizada na fábrica.");
+                    System.out.println("========================================\n");
+                } 
+                catch (IllegalArgumentException | IllegalStateException e) {
+                    System.out.println("\n========================================");
+                    System.out.println("OPERAÇÃO INVÁLIDA");
+                    System.out.println("========================================");
+                    System.out.println(e.getMessage());
+                    System.out.println("========================================\n");
                 }
             }else{
                 System.out.println(erroNaoInt);

@@ -14,32 +14,28 @@ public class MateriaPrima {
     }
 
     public boolean consumir(int demanda){ //tem MP pra gastar? br consumir
-        if (verificarDisponibilidade(demanda)){
-            quantidade-=demanda; //atualiza o estoque, já consumindo o demandado
-            System.out.println("Estoque atualizado!");
-            return true;
-        }return false;
+        verificarDisponibilidade(demanda);
+        quantidade-=demanda; //atualiza o estoque, já consumindo o demandado
+        System.out.println("Estoque atualizado!");
+        return true;
     }
 
     public void adicionarEstoque(int encomenda){//mais estoqueee de MP
         if(encomenda<=0){
-            System.out.println("Aviso! \nValor nulo ou negativo de encomenda de MP");
+            throw new IllegalArgumentException("Valor nulo ou negativo de encomenda de MP, deveria ser positivo");
         }
-        else{
-            quantidade+=encomenda;
-            System.out.println("Estoque atualizado...");
-        }
+        quantidade+=encomenda;
+        System.out.println("Estoque atualizado...");
     }
 
     public boolean verificarDisponibilidade(int demanda){ //tem MP suficiente?
         if (demanda<=0){
-            System.out.println("Aviso! \nDemanda nula ou negativa");//não é pra acontecer, mas por segurança existe
-        }else if(quantidade<demanda){
-            System.out.println("Aviso! \nPuts... Demanda ultrapassou o estoque de MP");//MP é matéria-prima
-        }else{
-            return true;
+            throw new IllegalArgumentException("Demanda de MP nula ou negativa, não pode!");//não é pra acontecer, mas por segurança existe
         }
-        return false;
+        if(quantidade<demanda){
+            throw new RecursoInsuficienteException("Puts... Demanda para produção ultrapassou o estoque de MP");//tratando problema como delicadesa de médico
+        }
+        return true;
     }
 
     public String getId(){//comecou os gets

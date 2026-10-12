@@ -17,24 +17,24 @@ public class GerenciadorProducao {
     }
 
     public void registrarDemanda(Demanda novaDemanda){ //adiciona demanda registrada agora na fila de demandas
+        if (novaDemanda == null) throw new IllegalArgumentException("A demanda não pode ser nula.");
         int custoDasMaquinas = this.calcularCustoProducao();
         novaDemanda.setCustoProducaoUnitario(custoDasMaquinas);
         demandas.add(novaDemanda);
     }
 
     public void adicionarMaquina(Maquina maquininha){ //maquininha existe, gerenciador agora sabe
+        if (maquininha == null) throw new IllegalArgumentException("A máquina não pode ser nula.");
         maquinas.add(maquininha);
     }
 
     public boolean executarProximaProducao(){
         if (estrategiaAtual==null){ //proteção pra se nao houver estrategia escolhida
-            System.out.println("Erro, nenhuma estratégia definida\nDEFINA UMA ESTRATEGIA ANTES DE FABRICAR");
-            return false;
+            throw new IllegalStateException("Erro: Nenhuma estratégia definida. DEFINA UMA ESTRATEGIA ANTES DE FABRICAR");
         }
         Demanda demandaAtual=estrategiaAtual.selecionarDemanda(demandas, budget);
         if (demandaAtual==null) { //proteção pra possivel demanda vazia
-            System.out.println("Erro ao encontrar demanda viável!(falta orçamento ou demanda na fila) Tentativa de fabricar falhou!"); 
-            return false;
+            throw new IllegalStateException("Erro: Não foi possível encontrar uma demanda viável. Verifique se a fila está vazia ou se há orçamento suficiente para as estratégias.");
         }
         Produto produto = null;
         String idGerado= "PROD"+ (produtosFabricados.size() + 1);
@@ -52,6 +52,9 @@ public class GerenciadorProducao {
                 return false;
         }
         for (Maquina m : maquinas) { //mandando pras maquinassss
+            if (this.budget < m.getCustoOperacao()) {
+                throw new RecursoInsuficienteException("Sem saldo para executar a máquina: " + m.getNome());
+            }
             m.ligar();
             this.budget -= m.getCustoOperacao();
             if (!m.processar(produto, materiaPrima)) {
@@ -68,16 +71,23 @@ public class GerenciadorProducao {
     }
 
     public void comprarMateriaPrima(int quantidade, int precoUnitario){ //bora gastar com MP
+        if (quantidade<=0){
+            throw new IllegalArgumentException("Erro: Quantidade deve ser maior que 0.");
+        } 
+        if (precoUnitario<=0) {
+            throw new IllegalArgumentException("Erro: Preço da MP deve ser maior que 0");
+        }
         int custoTotal = quantidade * precoUnitario;
         if(budget >= custoTotal){
             budget -= custoTotal;
             materiaPrima.adicionarEstoque(quantidade);
         } else{
-            System.out.println("Sem dinheiro para a compra");
+            throw new RecursoInsuficienteException("Sem saldo para a compra! Faltam " + (custoTotal - budget) + " Robux.");
         }
     }
 
     public void setEstrategia(EstrategiaProducao estrategiaNova){
+        if (estrategiaNova == null) throw new IllegalArgumentException("A estratégia não pode ser nula.");
         this.estrategiaAtual=estrategiaNova; //sera que é a melhor? kskks
     }
 

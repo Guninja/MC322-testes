@@ -5,3 +5,12 @@ plugins {
 application {
     mainClass = 'Main' 
 }
+
+run {
+    standardInput = System.in
+    jvmArgs = ["-Dfile.encoding=UTF-8"]
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

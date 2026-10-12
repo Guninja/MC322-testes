@@ -1,6 +1,22 @@
 import java.util.Scanner;
 
+/**
+ * Classe principal que atua como ponto de entrada para a simulação da fábrica.
+ * É responsável por gerenciar a interface interativa de linha de comando, capturar as escolhas do usuário,
+ * configurar o cenário de operação inicial e orquestrar a navegação entre os menus e submenus do sistema.
+ * 
+ * @author Luis Gustavo
+ */
 public class Main {
+    /**
+     * Método principal que inicializa e mantém a execução do sistema da fábrica.
+     * Conduz a etapa de setup (instanciação do maquinário e do gerenciador) e controla o 
+     * laço de repetição do menu principal. Também atua como a última barreira de proteção 
+     * do sistema, capturando exceções de domínio e entradas inválidas para evitar o 
+     * encerramento inesperado da aplicação.
+     * 
+     * @param args Argumentos de linha de comando (não utilizado nesta simulação).
+     */
     public static void main(String[] args) {
         Scanner entrada=new Scanner(System.in);
         String printe="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nESCOLHA DE CENÁRIO DA FÁBRICA\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";//iniciei variavel string para printar tudo de uma vez em um só println

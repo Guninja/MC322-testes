@@ -38,13 +38,17 @@ public class Demanda {
      * @throws DemandaInvalidaException Se a atualização resultar em uma quantidade negativa.
      */
     public int atualizarDemanda(int demanda) {
-        ProducaoIniciada();
         if (this.quantidadeProdutos + demanda < 0) {
             throw new DemandaInvalidaException("A quantidade de produtos não pode ser reduzida abaixo de zero.");
+        }
+        if (this.status == StatusDemanda.PENDENTE) {
+            ProducaoIniciada();
         }
         this.quantidadeProdutos = this.quantidadeProdutos + demanda;
         if (this.quantidadeProdutos == 0) {
             ProducaoFinalizada();
+        } else {
+            this.status = StatusDemanda.PENDENTE;
         }
         return this.quantidadeProdutos;
     }

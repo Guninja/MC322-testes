@@ -86,6 +86,12 @@ public class GerenciadorProducao {
             default:
                 return false;
         }
+        int custoTotalMaquinas = calcularCustoProducao();
+        if (this.budget < custoTotalMaquinas) {
+            throw new RecursoInsuficienteException("Sem saldo para executar todas as máquinas! Custo necessário: " + custoTotalMaquinas + " Robux.");
+        }
+        int mpTotalNecessaria = produto.getQuantidadeMateriaPrimaPorUnidade() * maquinas.size();
+        materiaPrima.verificarDisponibilidade(mpTotalNecessaria);
         for (Maquina m : maquinas) { //mandando pras maquinassss
             if (this.budget < m.getCustoOperacao()) {
                 throw new RecursoInsuficienteException("Sem saldo para executar a máquina: " + m.getNome());

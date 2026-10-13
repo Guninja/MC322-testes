@@ -4,7 +4,7 @@
  * 
  * @author Júlio Marcos
  */
-public abstract class Maquina {
+public abstract class Maquina implements Auditavel {
     private String nome;
     private boolean ligada = false; // status da maquina (on/off)
     private int capacidadeMaxima; // capacidade de guardar materia prima usada na producao atual

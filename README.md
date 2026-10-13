@@ -1,5 +1,5 @@
 # MC322-testes
-Realese 2 == Tarefa 2
+Realese x == Tarefa x
 
 By: Luis e Julio
 

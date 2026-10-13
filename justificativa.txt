@@ -20,3 +20,9 @@ Tarefa 2:
  O código respeita POO usando enum para representar textos de status e coisas do tipo. Também foi adicionado uma auditoria que certificou em relatório o estado de saúde das máquinas de produtos de forma simplificada.
  As máquinas têm desgaste progressivo por uso e é possível ver o relatório geral no menu.
  Por último, foi implementado mecanismos de submenus para o sistema ficar mais intuitivo e interativo com o usuário.
+
+Tarefa 4:
+Nessa parte apenas foi editado a forma de tratar erros, antes os metedos que precisavam tinham formas basicas com ifs para tratar possiveis erros.
+Porém, agora tem exceptionErrors no lugar.
+Além do tratamento de erros, também foi implementado o javadoc por completo.
+Portanto o funcionamento da simulação se mantem o da tarefa 3.

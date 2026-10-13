@@ -28,7 +28,7 @@ public abstract class Produto implements Auditavel {
         nome=nomeado;
         if(qualidadee < 0.0f || qualidadee > 1.0f){
             throw new IllegalArgumentException("Erro: qualidade deve estar entre 0 e 1 float.");
-        }else if(qualidadee<=0){
+        }else if(quantidadeMateriaPrimaPorUnidade <= 0){
             throw new IllegalArgumentException("Erro: quantidade de MP deve ser maior que 0");
         }
         qualidade=qualidadee;

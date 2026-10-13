@@ -227,7 +227,7 @@ public class Main {
                     System.out.println("Nenhuma alteração foi realizada na fábrica.");
                     System.out.println("========================================\n");
                 } 
-                catch (IllegalArgumentException | IllegalStateException e) {
+                catch (IllegalArgumentException | IllegalStateException | DemandaInvalidaException e) {
                     System.out.println("\n========================================");
                     System.out.println("OPERAÇÃO INVÁLIDA");
                     System.out.println("========================================");

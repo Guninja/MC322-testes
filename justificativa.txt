@@ -26,3 +26,11 @@ Nessa parte apenas foi editado a forma de tratar erros, antes os metedos que pre
 Porém, agora tem exceptionErrors no lugar.
 Além do tratamento de erros, também foi implementado o javadoc por completo.
 Portanto o funcionamento da simulação se mantem o da tarefa 3.
+
+Tarefa 5:
+Nessa tarefa as divisões de trabalho de cada classe foram melhor repartidas.
+Para isso foram criadas novas classes utilizando conceitos de agregação ou composição.
+Seguindo a ideai das tarefas anteriores, foi implementado o javadoc e catch exceptionErrors.
+Se não fosse a alteração da função de manutenção adicionada no menu, de resto está
+tudo com as mesmas funções da tarefa 4.
+Foi feito um diagrama que esta em .png .pdf e .drawio no repositório.

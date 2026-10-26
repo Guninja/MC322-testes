@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Classe abstrata que serve de base para os diferentes tipos de maquinas da planta industrial.
  * Define o comportamento padrao de funcionamento, desgaste, falhas e manutencao.
@@ -13,8 +17,14 @@ public abstract class Maquina implements Auditavel {
     private float saude; // porcentagem de saude da maquina (100.0 a 0.0)
     private int fatorDesgaste;
 
+    // Componentes Internos (Composição Estrita)
+    private Motor motor;               // Relação 1:1
+    private Controlador controlador;   // Relação 1:1
+    private List<Sensor> sensores;     // Relação 1:N
+
     /**
      * Construtor para inicializar os atributos da maquina e validar os parametros fornecidos.
+     * Instancia tambem os componentes internos no momento da construcao.
      * 
      * @param nomeado Nome identificador da maquina.
      * @param capacidade Capacidade maxima de armazenamento.
@@ -46,6 +56,13 @@ public abstract class Maquina implements Auditavel {
         this.custoOperacao = custoOperacao;
         this.saude = 100.0f;
         this.fatorDesgaste = fatorDesgaste;
+
+        // Composição estrita: instanciação dos componentes internos no construtor
+        this.motor = new Motor(150.0);
+        this.controlador = new Controlador("v2.4");
+        this.sensores = new ArrayList<>();
+        this.sensores.add(new Sensor("Temperatura"));
+        this.sensores.add(new Sensor("Pressão"));
     }
 
     /**
@@ -74,7 +91,7 @@ public abstract class Maquina implements Auditavel {
     }
 
     /**
-     * Liga a maquina. Se a saude estiver zerada, realiza o conserto automatico antes de ligar.
+     * Liga a maquina e aciona o motor. Se a saude estiver zerada, realiza o conserto automatico antes de ligar.
      */
     public void ligar() {
         if (saude <= 0) {
@@ -83,15 +100,17 @@ public abstract class Maquina implements Auditavel {
             reparar();
         } else {
             ligada = true;
+            motor.ligar();
             System.out.println("Máquina Ligada...");
         }
     }
 
     /**
-     * Desliga a maquina.
+     * Desliga a maquina e interrompe o motor.
      */
     public void desligar() {
         ligada = false;
+        motor.desligar();
         System.out.println("Máquina desligada...");
     }
 
@@ -118,11 +137,22 @@ public abstract class Maquina implements Auditavel {
     }
 
     /**
-     * Repara a maquina, restaurando sua saude para 100%.
+     * Repara a maquina, restaurando sua saude para 100% e resetando o sistema do controlador.
      */
     public void reparar() {
         saude = 100.0f;
+        controlador.resetarSistema();
         System.out.println("Máquina consertada!");
+    }
+
+    /**
+     * Obtem a lista nao modificavel dos sensores da maquina.
+     * Protege a colecao contra modificacoes externas indesejadas.
+     * 
+     * @return Lista imutavel de sensores.
+     */
+    public List<Sensor> getSensores() {
+        return Collections.unmodifiableList(sensores);
     }
 
     /**
@@ -171,12 +201,20 @@ public abstract class Maquina implements Auditavel {
     }
 
     /**
-     * Gera uma String com o relatorio de diagnostico da maquina.
+     * Gera uma String com o relatorio de diagnostico da maquina e delega a geração para seus componentes.
      * 
-     * @return Texto com o status, saude e risco de falha.
+     * @return Texto com o status, saude, risco de falha e relatorio dos componentes internos.
      */
     public String gerarRelatorioDiagnostico() {
-        String textoDiagnostico = precisaManutencao() ? "Máquina com defeito: precisa de manutenção" : "Manutenção em dia :)";
-        return "\n | Máquina: " + nome + " | Saúde: " + saude + " | Risco de Falha: " + probabilidadeFalha + " | Status: " + textoDiagnostico;
-    }  
+    String textoDiagnostico = precisaManutencao() ? "Máquina com defeito: precisa de manutenção" : "Manutenção em dia :)";
+    
+    String relatorio = "\n | Máquina: " + nome + " | Saúde: " + saude + " | Risco de Falha: " + probabilidadeFalha + " | Status: " + textoDiagnostico + "\n";
+    relatorio += "   -> " + motor.gerarRelatorioDiagnostico(saude) + "\n";
+    relatorio += "   -> " + controlador.gerarRelatorioDiagnostico(saude) + "\n";
+    
+    for (Sensor s : sensores) {
+        relatorio += "   -> " + s.gerarRelatorioDiagnostico(saude) + "\n";
+    }
+
+    return relatorio;
 }

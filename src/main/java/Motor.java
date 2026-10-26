@@ -1,5 +1,7 @@
 /**
  * Componente interno que representa o motor de uma máquina na planta industrial
+ * 
+ * @author Júlio Marcos
  */
 public class Motor {
     private double potencia;

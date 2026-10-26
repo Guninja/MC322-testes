@@ -1,6 +1,8 @@
 /**
  * Componente interno que representa um sensor individual da máquina.
  * Atua como uma Parte na relação de composição (1:N) com a classe Maquina.
+ * 
+ * @author Júlio Marcos
  */
 public class Sensor {
     private String tipo;

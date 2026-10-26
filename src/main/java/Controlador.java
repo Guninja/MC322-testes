@@ -1,5 +1,7 @@
 /**
  * Componente interno responsável pelo controle e firmware da máquina.
+ * 
+ * @author Júlio Marcos
  */
 public class Controlador {
     private String versaoFirmware;

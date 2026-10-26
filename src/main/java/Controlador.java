@@ -46,5 +46,3 @@ public class Controlador {
         return "[Controlador] Firmware: " + versaoFirmware + " | Status: " + status;
     }
 }
-
-```

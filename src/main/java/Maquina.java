@@ -217,4 +217,5 @@ public abstract class Maquina implements Auditavel {
     }
 
     return relatorio;
+    }
 }

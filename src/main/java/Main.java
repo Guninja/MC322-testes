@@ -9,8 +9,14 @@ import java.util.Scanner;
  */
 public class Main {
     /**
+     * Construtor padrão da classe principal da aplicação.
+     */
+    public Main() {
+    }
+
+    /**
      * Método principal que inicializa e mantém a execução do sistema da fábrica.
-     * Conduz a etapa de setup (instanciação do maquinário e do gerenciador) e controla o 
+     * Conduz a etapa de setup (instanciação da linha de produção, do maquinário e do gerenciador) e controla o 
      * laço de repetição do menu principal. Também atua como a última barreira de proteção 
      * do sistema, capturando exceções de domínio e entradas inválidas para evitar o 
      * encerramento inesperado da aplicação.
@@ -51,7 +57,8 @@ public class Main {
         int fatorDesgaste = cenarioEscolhido.getFatorDesgaste();
         float fatorFalha = cenarioEscolhido.getFatorFalha();// depois esta sendo instanciado os objetos da fabrica
         MateriaPrima metal=new MateriaPrima("MeBA", "Metal", "m^2", 0, 5);//será que é aço ou európio??? nunca saberemos... mas ambos são caros
-        GerenciadorProducao gerente=new GerenciadorProducao(budgetInicial,metal);//esse objeto sabe muito...
+        LinhaDeProducao linhaPrincipal = new LinhaDeProducao("Linha Principal de Lataria");//é quem cuida das maquinas com cuidado
+        GerenciadorProducao gerente = new GerenciadorProducao(budgetInicial, metal, linhaPrincipal);//esse objeto sabe muito...
         MaquinaPrensaEstampagem prensa=new MaquinaPrensaEstampagem("Prensa de Estampagem", 20, fatorFalha, 1, fatorDesgaste);
         MaquinaCorteLaser cnc=new MaquinaCorteLaser("CNC Corte Laser em metal", 10, fatorFalha, 2, fatorDesgaste);//cnc laser é cara pra funcionar
         MaquinaVerificacao inspecao=new MaquinaVerificacao("Inspeção", 30, fatorFalha, 1, fatorDesgaste);
@@ -81,6 +88,7 @@ public class Main {
             menu+="\n\n4 -> Ver estoque ou armazém";
             menu+="\n\n5 -> Alterar estratégia de produção";
             menu+="\n\n6 -> Relatório de auditoria";
+            menu+="\n\n7 -> Manutenção da linha de produção";
             menu+="\n\n0 -> SAIR";//tentei estruturar bonito o menu aqui no codigo, algo mais estetico para programador
             System.out.print(menu + "\nESCOLHA: ");
             if(entrada.hasNextInt()){//filtro para aceitar apenas int na escolha do menu
@@ -209,6 +217,11 @@ public class Main {
                             break;
                         case 6://Relatório de auditoria
                             System.out.println(gerente.gerarRelatorioDiagnostico());
+                            break;
+                        case 7://Manutenção das máquinas na linha de produção
+                            System.out.println("\n--- MANUTENÇÃO DA LINHA DE PRODUÇÃO ---");
+                            gerente.repararMaquinas();
+                            System.out.println("\nTodas as máquinas da linha foram inspecionadas e reparadas com sucesso!\n");
                             break;
                         case 0://fechar tudooo!
                             System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");

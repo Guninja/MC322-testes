@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.exception;
 /**
  * Exceção de domínio lançada quando ocorre uma operação inválida
  * associada ao ciclo de vida ou aos dados de uma Demanda.

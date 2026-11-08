@@ -1,3 +1,7 @@
+package br.unicamp.ic.mc322.service;
+import br.unicamp.ic.mc322.exception.RecursoInsuficienteException;
+import br.unicamp.ic.mc322.model.*;
+import br.unicamp.ic.mc322.strategy.EstrategiaProducao;
 import java.util.ArrayList;
 
 /**
@@ -208,5 +212,72 @@ public class GerenciadorProducao {
             filaDemandas+= "\n" + ++i + " - " + d.getTipoProduto() + " (x" + d.getQuantidadeProdutos() + ")";
         }
         return filaDemandas;
+    }
+    
+    /**
+     * Recupera o saldo financeiro atual da fábrica.
+     * 
+     * @return Valor inteiro do orçamento (budget) disponível.
+     */
+    public int getBudget() {
+        return budget;
+    }
+
+    /**
+     * Recupera a matéria-prima gerenciada pela fábrica.
+     * 
+     * @return Objeto MateriaPrima atual.
+     */
+    public MateriaPrima getMateriaPrima() {
+        return materiaPrima;
+    }
+
+    /**
+     * Recupera a linha de produção principal da fábrica.
+     * 
+     * @return Objeto LinhaDeProducao atual.
+     */
+    public LinhaDeProducao getLinhaProducao() {
+        return linhaProducao;
+    }
+
+    /**
+     * Recupera a fila de demandas cadastradas no gerenciador.
+     * 
+     * @return Lista de demandas da fábrica.
+     */
+    public java.util.List<Demanda> getDemandas() {
+        return java.util.Collections.unmodifiableList(demandas);
+    }
+
+    /**
+     * Recupera a lista de produtos finalizados no armazém.
+     * 
+     * @return Lista imutável de produtos fabricados.
+     */
+    public java.util.List<Produto> getProdutosFabricados() {
+        return java.util.Collections.unmodifiableList(produtosFabricados);
+    }
+
+    /**
+     * Recupera a estratégia de produção atualmente ativa.
+     * 
+     * @return A estratégia de produção configurada.
+     */
+    public EstrategiaProducao getEstrategiaAtual() {
+        return estrategiaAtual;
+    }
+
+    /**
+     * Adiciona diretamente um produto já fabricado ao armazém (utilizado na reconstrução via persistência).
+     * 
+     * @param produto Produto a ser restaurado no armazém.
+     * @throws IllegalArgumentException se o produto for nulo.
+     */
+    public void adicionarProdutoFabricado(Produto produto) {
+        if (produto == null) {
+            throw new IllegalArgumentException("O produto adicionado ao armazém não pode ser nulo.");
+        }
+        this.produtosFabricados.add(produto);
     }
 }

@@ -1,3 +1,6 @@
+package br.unicamp.ic.mc322.strategy;
+import br.unicamp.ic.mc322.model.Demanda;
+import br.unicamp.ic.mc322.model.StatusDemanda;
 import java.util.List;
 
 /**

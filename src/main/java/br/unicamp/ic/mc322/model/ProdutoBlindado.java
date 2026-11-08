@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Subclasse que representa uma peça de lataria de alta qualidade (Blindada) na fábrica.
  * Exige um maior consumo de matéria-prima e possui um tempo de processamento mais longo.

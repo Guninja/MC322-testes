@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Componente interno que representa o motor de uma máquina na planta industrial
  * 

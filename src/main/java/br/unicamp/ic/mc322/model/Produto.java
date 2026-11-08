@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Classe abstrata que representa um produto genérico na linha de produção da fábrica.
  * Define a estrutura base, os atributos de qualidade e o contrato de auditoria para 

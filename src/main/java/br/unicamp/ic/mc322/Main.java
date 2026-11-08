@@ -1,3 +1,9 @@
+package br.unicamp.ic.mc322;
+import br.unicamp.ic.mc322.exception.DemandaInvalidaException;
+import br.unicamp.ic.mc322.exception.RecursoInsuficienteException;
+import br.unicamp.ic.mc322.model.*;
+import br.unicamp.ic.mc322.service.GerenciadorProducao;
+import br.unicamp.ic.mc322.strategy.*;
 import java.util.Scanner;
 
 /**

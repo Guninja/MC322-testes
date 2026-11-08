@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Enumeração que define os cenários de inicialização da fábrica.
  * Cada cenário configura a dificuldade da simulação, alterando  orçamento inicial,

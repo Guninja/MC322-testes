@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -217,5 +218,79 @@ public abstract class Maquina implements Auditavel {
     }
 
     return relatorio;
+    }
+
+    /**
+     * Obtém a probabilidade base de falha da máquina.
+     * 
+     * @return Probabilidade de falha entre 0.0 e 1.0.
+     */
+    public float getProbabilidadeFalha() {
+        return probabilidadeFalha;
+    }
+
+    /**
+     * Obtém o fator de desgaste mecânico da máquina.
+     * 
+     * @return Fator inteiro de desgaste.
+     */
+    public int getFatorDesgaste() {
+        return fatorDesgaste;
+    }
+
+    /**
+     * Obtém o componente motor interno da máquina.
+     * 
+     * @return Instância do Motor da máquina.
+     */
+    public Motor getMotor() {
+        return motor;
+    }
+
+    /**
+     * Obtém o componente controlador interno da máquina.
+     * 
+     * @return Instância do Controlador da máquina.
+     */
+    public Controlador getControlador() {
+        return controlador;
+    }
+
+    /**
+     * Restaura o estado operacional da máquina a partir de dados persistidos,
+     * validando os limites de integridade do domínio.
+     * 
+     * @param novaSaude Percentual de saúde da máquina (entre 0.0 e 100.0).
+     * @param estadoLigada Indica se a máquina estava ligada ou desligada.
+     * @throws IllegalArgumentException Se a saúde estiver fora do intervalo de 0.0 a 100.0.
+     */
+    public void restaurarEstado(float novaSaude, boolean estadoLigada) {
+        if (novaSaude < 0.0f || novaSaude > 100.0f) {
+            throw new IllegalArgumentException("A saúde da máquina deve estar entre 0.0 e 100.0.");
+        }
+        this.saude = novaSaude;
+        this.ligada = estadoLigada;
+        if (estadoLigada && novaSaude > 0) {
+            this.motor.ligar();
+        } else {
+            this.motor.desligar();
+        }
+    }
+
+    /**
+     * Substitui os componentes internos da máquina durante a reconstrução via persistência.
+     * 
+     * @param novoMotor Objeto Motor reconstruído.
+     * @param novoControlador Objeto Controlador reconstruído.
+     * @param novosSensores Lista de objetos Sensor reconstruídos.
+     * @throws IllegalArgumentException Se algum componente for nulo ou a lista de sensores for vazia.
+     */
+    public void restaurarComponentes(Motor novoMotor, Controlador novoControlador, List<Sensor> novosSensores) {
+        if (novoMotor == null || novoControlador == null || novosSensores == null || novosSensores.isEmpty()) {
+            throw new IllegalArgumentException("Componentes internos da máquina não podem ser nulos ou vazios.");
+        }
+        this.motor = novoMotor;
+        this.controlador = novoControlador;
+        this.sensores = new ArrayList<>(novosSensores);
     }
 }

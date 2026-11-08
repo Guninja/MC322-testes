@@ -2,13 +2,31 @@ plugins {
     id 'application'
 }
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
 application {
-    mainClass = 'Main'
+    mainClass = 'br.unicamp.ic.mc322.Main'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {
     standardInput = System.in
-    jvmArgs = ["-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8"]
+    jvmArgs = [
+        "-Dfile.encoding=UTF-8",
+        "-Dstdout.encoding=UTF-8",
+        "-Dstderr.encoding=UTF-8"
+    ]
 }
 
 tasks.withType(JavaCompile) {

@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Enumeração que representa os diferentes estados que uma {@link Demanda}
  * pode assumir ao longo do seu ciclo de vida na planta industrial.

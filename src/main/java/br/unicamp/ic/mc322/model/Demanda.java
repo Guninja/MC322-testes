@@ -1,3 +1,5 @@
+package br.unicamp.ic.mc322.model;
+import br.unicamp.ic.mc322.exception.DemandaInvalidaException;
 /**
  * Representa uma demanda de produção na planta industrial.
  * Modela a quantidade de produtos solicitados, tipo de material,
@@ -159,5 +161,27 @@ public class Demanda {
      */
     public int getQuantidadeProdutos() {
         return quantidadeProdutos;
+    }
+
+    /**
+     * Obtém o custo de produção unitário associado à demanda.
+     * 
+     * @return Valor inteiro do custo unitário.
+     */
+    public int getCustoProducaoUnitario() {
+        return custoProducaoUnitario;
+    }
+
+    /**
+     * Define diretamente o status da demanda (utilizado na restauração de estado via persistência).
+     * 
+     * @param novoStatus O estado a ser atribuído à demanda.
+     * @throws IllegalArgumentException Se o status informado for nulo.
+     */
+    public void setStatus(StatusDemanda novoStatus) {
+        if (novoStatus == null) {
+            throw new IllegalArgumentException("O status da demanda não pode ser nulo.");
+        }
+        this.status = novoStatus;
     }
 }

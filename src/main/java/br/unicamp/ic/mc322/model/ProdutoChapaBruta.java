@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Subclasse que representa uma peça de lataria de baixa qualidade (Chapa Bruta) na fábrica.
  * Exige o menor consumo de matéria-prima e possui o tempo de processamento mais rápido.

@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Subclasse que representa uma peça de lataria de média qualidade (Galvanizada) na fábrica.
  * Exige um consumo intermediário de matéria-prima e possui tempo de processamento mediano.

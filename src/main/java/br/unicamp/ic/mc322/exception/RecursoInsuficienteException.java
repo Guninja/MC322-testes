@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.exception;
 /**
  * Exceção de domínio lançada quando a fábrica não possui recursos suficientes
  * (como saldo no orçamento ou estoque de matéria-prima) para concluir uma operação.

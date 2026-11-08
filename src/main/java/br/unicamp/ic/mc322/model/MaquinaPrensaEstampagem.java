@@ -1,13 +1,14 @@
+package br.unicamp.ic.mc322.model;
 /**
- * Classe que representa uma maquina de corte a laser na planta industrial.
- * Realiza o processamento cortando os produtos e sofrendo desgaste a cada uso.
+ * Classe que representa uma maquina de prensa de estampagem na planta industrial.
+ * Responsavel pelo processo de moldagem de pecas e latarias.
  * 
  * @author Júlio Marcos
  */
-public class MaquinaCorteLaser extends Maquina {
+public class MaquinaPrensaEstampagem extends Maquina {
 
     /**
-     * Construtor para inicializar a maquina de corte a laser.
+     * Construtor para inicializar a prensa de estampagem.
      * 
      * @param nomeMaq Nome identificador da maquina.
      * @param capMax Capacidade maxima de materia prima.
@@ -15,16 +16,16 @@ public class MaquinaCorteLaser extends Maquina {
      * @param custoOpe Custo por operacao.
      * @param fatorDesgaste Fator de desgaste da saude.
      */
-    public MaquinaCorteLaser(String nomeMaq, int capMax, float prob, int custoOpe, int fatorDesgaste) {
+    public MaquinaPrensaEstampagem(String nomeMaq, int capMax, float prob, int custoOpe, int fatorDesgaste) {
         super(nomeMaq, capMax, prob, custoOpe, fatorDesgaste);
     }
 
     /**
-     * Processa o produto utilizando a materia prima informada.
+     * Processa o produto realizando a estampagem com a materia prima fornecida.
      * 
-     * @param obraPrima Produto que sera processado.
-     * @param material Materia prima a ser consumida.
-     * @return true se o produto foi processado com sucesso, false caso contrario.
+     * @param obraPrima Produto a ser processado.
+     * @param material Materia prima a ser utilizada.
+     * @return true se o processo foi realizado com sucesso, false caso contrario.
      * @throws IllegalArgumentException Se o produto ou a materia prima forem nulos.
      */
     @Override
@@ -42,9 +43,9 @@ public class MaquinaCorteLaser extends Maquina {
         } else if (getCapacidadeMaxima() < demandaMaterial) {
             System.out.println("Demanda de MP maior que a capacidade da Máquina, as vezes menos é mais...");
         } else if (material.consumir(demandaMaterial)) {
-            desgate(); // aplicar o desgate na maquina
+            desgate(); // aplica o desgate na maquina
             if (verificarFalha()) {
-                obraPrima.aumentarProbabilidadeFalha(0.06f); 
+                obraPrima.aumentarProbabilidadeFalha(0.07f); 
             }
             return obraPrima.processar();
         } else {
@@ -56,10 +57,10 @@ public class MaquinaCorteLaser extends Maquina {
     /**
      * Retorna o tipo especifico desta maquina.
      * 
-     * @return String com o tipo da maquina.
+     * @return Nome do tipo da maquina.
      */
     @Override
     public String getTipo() {
-        return "Maquina de corte a Laser";
+        return "Prensa de Estampagem";
     }
 }

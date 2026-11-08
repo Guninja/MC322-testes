@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Componente interno responsável pelo controle e firmware da máquina.
  * 
@@ -46,5 +47,14 @@ public class Controlador {
     public String gerarRelatorioDiagnostico(float saudeMaquina) {
         String status = (saudeMaquina > 0 && sistemaOk) ? "Sincronizado" : "Falha de Comunicação";
         return "[Controlador] Firmware: " + versaoFirmware + " | Status: " + status;
+    }
+
+    /**
+     * Obtém a versão do firmware instalada no controlador.
+     * 
+     * @return String contendo a versão do firmware.
+     */
+    public String getVersaoFirmware() {
+        return versaoFirmware;
     }
 }

@@ -1,3 +1,5 @@
+package br.unicamp.ic.mc322.model;
+import br.unicamp.ic.mc322.exception.RecursoInsuficienteException;
 /**
  * Classe que representa a matéria-prima utilizada pela fábrica na linha de produção.
  * É responsável pelo gerenciamento de estoque físico, custos unitários e 

@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Classe que representa uma maquina de verificacao e inspecao de qualidade na planta industrial.
  * Realiza os testes no produto e o descarta caso nao passe nos criterios de inspecao.

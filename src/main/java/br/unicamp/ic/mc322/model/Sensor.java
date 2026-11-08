@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Componente interno que representa um sensor individual da máquina.
  * Atua como uma Parte na relação de composição (1:N) com a classe Maquina.

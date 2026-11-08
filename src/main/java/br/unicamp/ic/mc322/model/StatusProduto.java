@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Enumeração que representa os  estados de um produto na linha de produção da fábrica.
  * Utiliza tipagem forte evitando o uso de Strings soltas.

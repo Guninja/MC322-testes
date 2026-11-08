@@ -1,3 +1,4 @@
+package br.unicamp.ic.mc322.model;
 /**
  * Interface que define o contrato genérico para os componentes auditáveis da fábrica(produtos/maquinas).
  * Classes que implementam esta interface comprometem-se a fornecer mecanismos 

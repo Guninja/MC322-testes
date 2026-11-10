@@ -1,7 +1,9 @@
 package br.unicamp.ic.mc322;
 import br.unicamp.ic.mc322.exception.DemandaInvalidaException;
+import br.unicamp.ic.mc322.exception.PersistenciaException;
 import br.unicamp.ic.mc322.exception.RecursoInsuficienteException;
 import br.unicamp.ic.mc322.model.*;
+import br.unicamp.ic.mc322.persistence.PersistenciaPlanta;
 import br.unicamp.ic.mc322.service.GerenciadorProducao;
 import br.unicamp.ic.mc322.strategy.*;
 import java.util.Scanner;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 /**
  * Classe principal que atua como ponto de entrada para a simulação da fábrica.
  * É responsável por gerenciar a interface interativa de linha de comando, capturar as escolhas do usuário,
- * configurar o cenário de operação inicial e orquestrar a navegação entre os menus e submenus do sistema.
+ * configurar o cenário de operação inicial e orquestrar a navegação entre os menus, submenus e persistência em XML.
  * 
  * @author Luis Gustavo
  */
@@ -24,13 +26,14 @@ public class Main {
      * Método principal que inicializa e mantém a execução do sistema da fábrica.
      * Conduz a etapa de setup (instanciação da linha de produção, do maquinário e do gerenciador) e controla o 
      * laço de repetição do menu principal. Também atua como a última barreira de proteção 
-     * do sistema, capturando exceções de domínio e entradas inválidas para evitar o 
+     * do sistema, capturando exceções de domínio, persistência e entradas inválidas para evitar o 
      * encerramento inesperado da aplicação.
      * 
      * @param args Argumentos de linha de comando (não utilizado nesta simulação).
      */
     public static void main(String[] args) {
         Scanner entrada=new Scanner(System.in);
+        PersistenciaPlanta persistencia = new PersistenciaPlanta();
         String printe="\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\nESCOLHA DE CENÁRIO DA FÁBRICA\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";//iniciei variavel string para printar tudo de uma vez em um só println
         printe+="\n1 - Ideal (orçamento bom, desgaste padrão)\n2 - Apocalíptico (orçamento baixíssimo, desgastes enormes)";
         System.out.println(printe);
@@ -95,6 +98,8 @@ public class Main {
             menu+="\n\n5 -> Alterar estratégia de produção";
             menu+="\n\n6 -> Relatório de auditoria";
             menu+="\n\n7 -> Manutenção da linha de produção";
+            menu+="\n\n8 -> Salvar estado da planta (XML)";
+            menu+="\n\n9 -> Carregar estado da planta (XML)";
             menu+="\n\n0 -> SAIR";//tentei estruturar bonito o menu aqui no codigo, algo mais estetico para programador
             System.out.print(menu + "\nESCOLHA: ");
             if(entrada.hasNextInt()){//filtro para aceitar apenas int na escolha do menu
@@ -104,7 +109,7 @@ public class Main {
                         case 1://comprar MP
                             System.out.print("Digite quantas unidades (" + metal.getUnidade() + ") de "+metal.getNome()+" deseja comprar: ");
                             if(entrada.hasNextInt()){
-                                int quantidadeComprando=entrada.nextInt();
+                                int quantidadeComprando=entrada.hasNextInt() ? entrada.nextInt() : 0;
                                 gerente.comprarMateriaPrima(quantidadeComprando,metal.getCustoPorUnidade());
                             }else{
                                 System.out.println("Compra não realizada,"+erroNaoInt);
@@ -229,6 +234,21 @@ public class Main {
                             gerente.repararMaquinas();
                             System.out.println("\nTodas as máquinas da linha foram inspecionadas e reparadas com sucesso!\n");
                             break;
+                        case 8://Salvar estado da planta em XML
+                            System.out.println("\n--- SALVAR ESTADO DA PLANTA (XML) ---");
+                            persistencia.salvar(gerente);
+                            System.out.println("Estado da fábrica salvo com sucesso no arquivo 'estado_planta.xml'!");
+                            break;
+                        case 9://Carregar estado da planta de XML
+                            System.out.println("\n--- CARREGAR ESTADO DA PLANTA (XML) ---");
+                            GerenciadorProducao gerenteCarregado = persistencia.carregar();
+                            gerente = gerenteCarregado;
+                            metal = gerente.getMateriaPrima();
+                            linhaPrincipal = gerente.getLinhaProducao();
+                            estrategiaPadrao = gerente.getEstrategiaAtual();
+                            cenarioAtual = "Recuperado via XML";
+                            System.out.println("Estado da fábrica carregado e restaurado com sucesso a partir de 'estado_planta.xml'!");
+                            break;
                         case 0://fechar tudooo!
                             System.out.println("\n-SAINDO...\nEspero ter sido útil, até mais!\n   O.O  ");
                             menuAtivo=false;
@@ -246,6 +266,14 @@ public class Main {
                     System.out.println("Nenhuma alteração foi realizada na fábrica.");
                     System.out.println("========================================\n");
                 } 
+                catch (PersistenciaException e) {
+                    System.out.println("\n========================================");
+                    System.out.println("ERRO DE PERSISTÊNCIA (XML)");
+                    System.out.println("========================================");
+                    System.out.println(e.getMessage());
+                    System.out.println("O estado atual da fábrica em memória foi preservado.");
+                    System.out.println("========================================\n");
+                }
                 catch (IllegalArgumentException | IllegalStateException | DemandaInvalidaException e) {
                     System.out.println("\n========================================");
                     System.out.println("OPERAÇÃO INVÁLIDA");
